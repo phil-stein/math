@@ -206,35 +206,36 @@ MAT4_INLINE void mat4_perspective(float fovy, float aspect, float near_val, floa
   	dest[3][2] = 2.0f * near_val * far_val * fn;
 }
 
-MAT4_INLINE void mat4_ortho(int w, int h, mat4 dest)
+// MAT4_INLINE void mat4_ortho(int w, int h, mat4 dest)
+// {
+//   // src: https://www.youtube.com/watch?v=x_XLm9Uj_V4
+// 	vec4 r0 = { 1/w , 0.0f, 0.0f, 0.0f };
+// 	vec4 r1 = { 0.0f, -2/h , 0.0f, 0.0f };
+// 	vec4 r2 = { 0.0f, 0.0f, 1.0f, 0.0f };
+// 	vec4 r3 = { -1.f, 1.0f, 0.0f, 1.0f };
+// 
+// 	vec4_copy(r0, dest[0]);
+// 	vec4_copy(r1, dest[1]);
+// 	vec4_copy(r2, dest[2]);
+// 	vec4_copy(r3, dest[3]);
+// 
+// }
+
+MAT4_INLINE void mat4_ortho(float left, float right, float bottom,  float top, float nearVal, float farVal, mat4  dest) 
 {
-  // src: https://www.youtube.com/watch?v=x_XLm9Uj_V4
-	vec4 r0 = { 1/w , 0.0f, 0.0f, 0.0f };
-	vec4 r1 = { 0.0f, -2/h , 0.0f, 0.0f };
-	vec4 r2 = { 0.0f, 0.0f, 1.0f, 0.0f };
-	vec4 r3 = { -1.f, 1.0f, 0.0f, 1.0f };
-
-	vec4_copy(r0, dest[0]);
-	vec4_copy(r1, dest[1]);
-	vec4_copy(r2, dest[2]);
-	vec4_copy(r3, dest[3]);
-
-  // void glm_ortho(float left,    float right, float bottom,  float top, float nearVal, float farVal, mat4  dest) 
-  // {
-  //   float rl, tb, fn;
-  //   glm_mat4_zero(dest);  
-  //   rl = 1.0f / (right  - left);
-  //   tb = 1.0f / (top    - bottom);   
-  //   fn =-1.0f / (farVal - nearVal);
-  //   dest[0][0] = 2.0f * rl;
-  //   dest[1][1] = 2.0f * tb;
-  //   dest[2][2] = 2.0f * fn;
-  //   dest[3][0] =-(right  + left)    * rl;
-  //   dest[3][1] =-(top    + bottom)  * tb;
-  //   dest[3][2] = (farVal + nearVal) * fn;
-  //   dest[3][3] = 1.0f; 
-  // }
-
+	// @NOTE: yoinked straight from cglm, look this up
+  float rl, tb, fn;
+  mat4_make_zero(dest);  
+  rl = 1.0f / (right  - left);
+  tb = 1.0f / (top    - bottom);   
+  fn =-1.0f / (farVal - nearVal);
+  dest[0][0] = 2.0f * rl;
+  dest[1][1] = 2.0f * tb;
+  dest[2][2] = 2.0f * fn;
+  dest[3][0] =-(right  + left)    * rl;
+  dest[3][1] =-(top    + bottom)  * tb;
+  dest[3][2] = (farVal + nearVal) * fn;
+  dest[3][3] = 1.0f; 
 }
 
 MAT4_INLINE void mat4_make_model(mat4 model, vec3 pos, vec3 rot, vec3 scale)
