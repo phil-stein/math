@@ -1,0 +1,135 @@
+#ifndef VEC_MATH_H
+#define VEC_MATH_H
+
+#include "math_inc.h"
+
+typedef float	vec4[4];	// v[0]: x, v[1]: y, v[2]: z, v[3]: w
+
+typedef int ivec4[4];	  // v[0]: x, v[1]: y, v[2]: z, v[3]: w
+
+
+// ---- vec4 creation ----
+
+#define VEC4_INIT(f)		      { f, f, f, f }
+#define VEC4_XYZW_INIT(x, y, z, w)    { x, y, z, w }
+#define VEC4_X_INIT(x)		      { x, 0, 0, 0 }
+#define VEC4_Y_INIT(y)		      { 0, y, 0, 0 }
+#define VEC4_Z_INIT(z)		      { 0, 0, z, 0 }
+#define VEC4_W_INIT(w)		      { 0, 0, 0, w }
+
+#define VEC4(f)			(vec4){ f, f, f, f }
+#define VEC4_XYZW(x, y, z, w)	(vec4){ x, y, z, w }
+#define VEC4_X(x)		(vec4){ x, 0, 0, 0 }
+#define VEC4_Y(y)		(vec4){ 0, y, 0, 0 }
+#define VEC4_Z(z)		(vec4){ 0, 0, z, 0 }
+#define VEC4_W(w)		(vec4){ 0, 0, 0, w }
+
+// ---- print utils ----
+#define P_VEC4(v) 	printf("|%s| x: %.2f, y: %.2f, z: %.2f, w: %.f\n", #v, v[0], v[1], v[2], v[3])
+
+
+// ---- vec4 ----
+
+M_INLINE void vec4_add(vec4 a, vec4 b, vec4 dest)
+{
+	dest[0] = a[0] + b[0];
+	dest[1] = a[1] + b[1];
+	dest[2] = a[2] + b[2];
+	dest[3] = a[3] + b[3];
+}
+M_INLINE void vec4_add_f(vec4 a, float f, vec4 dest)
+{
+	dest[0] = a[0] + f;
+	dest[1] = a[1] + f;
+	dest[2] = a[2] + f;
+	dest[3] = a[3] + f;
+}
+
+M_INLINE void vec4_sub(vec4 a, vec4 b, vec4 dest)
+{
+	dest[0] = a[0] - b[0];
+	dest[1] = a[1] - b[1];
+	dest[2] = a[2] - b[2];
+	dest[3] = a[3] - b[3];
+}
+M_INLINE void vec4_sub_f(vec4 a, float f, vec4 dest)
+{
+	dest[0] = a[0] - f;
+	dest[1] = a[1] - f;
+	dest[2] = a[2] - f;
+	dest[3] = a[3] - f;
+}
+
+M_INLINE void vec4_mul(vec4 a, vec3 b, vec4 dest)
+{
+	dest[0] = a[0] * b[0];
+	dest[1] = a[1] * b[1];
+	dest[2] = a[2] * b[2];
+	dest[3] = a[3] * b[4];
+}
+M_INLINE void vec4_mul_f(vec4 a, float f, vec4 dest)
+{
+	dest[0] = a[0] * f;
+	dest[1] = a[1] * f;
+	dest[2] = a[2] * f;
+	dest[3] = a[3] * f;
+}
+
+M_INLINE float vec4_dot(vec4 a, vec4 b)
+{
+	return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]) + (a[3] * b[3]);
+}
+
+M_INLINE float vec4_magnitude(vec4 a)
+{
+	return sqrtf((a[0] * a[0]) + (a[1] * a[1]) + (a[2] * a[2]) + (a[3] * a[3]));
+}
+
+M_INLINE void vec4_copy(vec4 a, vec4 dest)
+{
+	dest[0] = a[0];
+	dest[1] = a[1];
+	dest[2] = a[2];
+	dest[3] = a[3];
+}
+
+M_INLINE void vec4_negate(vec4 a, vec4 dest)
+{
+	dest[0] = -a[0];
+	dest[1] = -a[1];
+	dest[2] = -a[2];
+	dest[3] = -a[3];
+}
+
+M_INLINE float vec4_distance(vec4 a, vec4 b)
+{
+	vec4 d;
+	vec4_sub(a, b, d);
+	return vec4_magnitude(d); 
+}
+
+M_INLINE void vec4_clamp(vec4 a, vec4 min, vec4 max, vec4 dest)
+{
+	dest[0] = CLAMP(a[0], min[0], max[0]);
+	dest[1] = CLAMP(a[1], min[1], max[1]);
+	dest[2] = CLAMP(a[2], min[2], max[2]);
+	dest[3] = CLAMP(a[3], min[3], max[3]);
+}
+
+M_INLINE void vec4_clamp_f(vec4 a, vec4 min, vec4 max, vec4 dest)
+{
+	dest[0] = CLAMP(a[0], min[0], max[0]);
+	dest[1] = CLAMP(a[1], min[1], max[1]);
+	dest[2] = CLAMP(a[2], min[2], max[2]);
+	dest[3] = CLAMP(a[3], min[3], max[3]);
+}
+
+M_INLINE void vec4_abs(vec4 a, vec4 dest)
+{
+	dest[0] = fabsf(a[0]);
+	dest[1] = fabsf(a[1]);
+	dest[2] = fabsf(a[2]);
+	dest[3] = fabsf(a[3]);
+}
+
+#endif
