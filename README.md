@@ -3,8 +3,9 @@
 
 
 simple math library for games. <br>
-heavily inspired by and partially a direct copy of [cglm]() <br>
-*if you are lookig for something that covers all bases, is fast and stable, use the afore mentioned [cglm]() or the c++ [glm]()*
+heavily inspired by and partially a direct copy of [cglm](https://github.com/recp/cglm) <br>
+_**if you are lookig for something that covers all bases, is fast and stable, <br>
+use the aforementioned [cglm](https://github.com/recp/cglm) or the original c++ [glm](https://github.com/Groovounet/glm)**_
 
 features:
   - [x] util 
