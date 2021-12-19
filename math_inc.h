@@ -22,6 +22,7 @@
 #include "math_vec3.h"
 #include "math_vec4.h"
 #include "math_mat4.h"
+#include "math_color.h"
 
 #endif
 
