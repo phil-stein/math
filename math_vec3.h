@@ -145,4 +145,31 @@ M_INLINE void vec3_abs(vec3 a, vec3 dest)
 }
 
 
+// ---- conditionals ----
+
+M_INLINE bool vec3_equal(vec3 a, vec3 b)
+{
+  return a[0] == b[0] && a[1] == b[1] && a[2] == b[2];
+}
+M_INLINE bool vec3_not_equal(vec3 a, vec3 b)
+{
+  return !vec3_equal(a, b);
+}
+M_INLINE bool vec3_greater(vec3 a, vec3 b)
+{
+  return a[0] > b[0] && a[1] > b[1] && a[2] > b[2];
+}
+M_INLINE bool vec3_less(vec3 a, vec3 b)
+{
+  return a[0] < b[0] && a[1] < b[1] && a[2] < b[2];
+}
+M_INLINE bool vec3_greater_eq(vec3 a, vec3 b)
+{
+  return a[0] >= b[0] && a[1] >= b[1] && a[2] >= b[2];
+}
+M_INLINE bool vec3_less_eq(vec3 a, vec3 b)
+{
+  return a[0] <= b[0] && a[1] <= b[1] && a[2] >= b[2];
+}
+
 #endif

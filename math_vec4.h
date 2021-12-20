@@ -132,4 +132,38 @@ M_INLINE void vec4_abs(vec4 a, vec4 dest)
 	dest[3] = fabsf(a[3]);
 }
 
+
+// ---- conditionals ----
+
+M_INLINE bool vec4_equal(vec4 a, vec4 b)
+{
+  return a[0] == b[0] && a[1] == b[1] && 
+         a[2] == b[2] && a[3] == b[3];
+}
+M_INLINE bool vec4_not_equal(vec4 a, vec4 b)
+{
+  return !vec4_equal(a, b);
+}
+M_INLINE bool vec4_greater(vec4 a, vec4 b)
+{
+  return a[0] > b[0] && a[1] > b[1] && 
+         a[2] > b[2] && a[3] > b[3];
+}
+M_INLINE bool vec4_less(vec4 a, vec4 b)
+{
+  return a[0] < b[0] && a[1] < b[1] && 
+         a[2] < b[2] && a[3] < b[3];
+}
+M_INLINE bool vec4_greater_eq(vec4 a, vec4 b)
+{
+  return a[0] >= b[0] && a[1] >= b[1] && 
+         a[2] >= b[2] && a[3] >= b[3];
+}
+M_INLINE bool vec4_less_eq(vec4 a, vec4 b)
+{
+  return a[0] <= b[0] && a[1] <= b[1] && 
+         a[2] >= b[2] && a[3] <= b[3];
+}
+
+
 #endif

@@ -133,4 +133,32 @@ M_INLINE void vec2_abs(vec2 a, vec2 dest)
 	dest[1] = fabsf(a[1]);
 }
 
+
+// ---- conditionals ----
+
+M_INLINE bool vec2_equal(vec2 a, vec2 b)
+{
+  return a[0] == b[0] && a[1] == b[1];
+}
+M_INLINE bool vec2_not_equal(vec2 a, vec2 b)
+{
+  return !vec2_equal(a, b);
+}
+M_INLINE bool vec2_greater(vec2 a, vec2 b)
+{
+  return a[0] > b[0] && a[1] > b[1];
+}
+M_INLINE bool vec2_less(vec2 a, vec2 b)
+{
+  return a[0] < b[0] && a[1] < b[1];
+}
+M_INLINE bool vec2_greater_eq(vec2 a, vec2 b)
+{
+  return a[0] >= b[0] && a[1] >= b[1];
+}
+M_INLINE bool vec2_less_eq(vec2 a, vec2 b)
+{
+  return a[0] <= b[0] && a[1] <= b[1];
+}
+
 #endif

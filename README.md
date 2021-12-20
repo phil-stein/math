@@ -15,6 +15,7 @@ features:
   - [ ] ivec3
   - [x] vec4
   - [ ] ivec4
+  - [x] vec compare
   - [ ] mat3
   - [x] mat4
   - [ ] simd!
