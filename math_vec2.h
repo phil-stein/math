@@ -20,7 +20,9 @@ typedef int ivec2[2];   // v[0]: x, v[1]: y
 
 
 // ---- print util ----
-#define P_VEC2(v) 	printf("|%s| x: %.2f, y: %.2f\n", #v, v[0], v[1])
+#define P_VEC2(v) 	  printf("|%s| x: %.2f, y: %.2f\n", #v, v[0], v[1])
+#define P_IL_VEC2(v) 	printf("|%s| x: %.2f, y: %.2f", #v, v[0], v[1])
+
 
 // static to avoid duplication when including header in multiple files 
 // forced inline to always inline the functions

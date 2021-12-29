@@ -26,6 +26,7 @@ typedef int ivec4[4];	  // v[0]: x, v[1]: y, v[2]: z, v[3]: w
 
 // ---- print utils ----
 #define P_VEC4(v) 	printf("|%s| x: %.2f, y: %.2f, z: %.2f, w: %.f\n", #v, v[0], v[1], v[2], v[3])
+#define P_IL_VEC4(v) 	printf("|%s| x: %.2f, y: %.2f, z: %.2f, w: %.f", #v, v[0], v[1], v[2], v[3])
 
 
 // ---- vec4 ----

@@ -5,7 +5,7 @@
 
 // mat4 row goes down
 //
-// mat4[0]	mat4[1]		mat4[2]		mat4[3]
+// mat4[0]	  mat4[1]		  mat4[2]		  mat4[3]
 // mat4[0][0]	mat4[1][0]	mat4[2][0]	mat4[3][0]
 // mat4[0][1]	mat4[1][1]	mat4[2][1]	mat4[3][1]
 // mat4[0][2]	mat4[1][2]	mat4[2][2]	mat4[3][2]
@@ -24,11 +24,8 @@ typedef float mat4[4][4];
 
 
 
-// static to avoid duplication when including header in multiple files 
-// forced inline to always inline the functions
-#define MAT4_INLINE static inline __attribute((always_inline)) 
 
-MAT4_INLINE void mat4_make_identity(mat4 m)
+M_INLINE void mat4_make_identity(mat4 m)
 {
 	vec4 r0 = { 1.0f, 0.0f, 0.0f, 0.0f };
 	vec4 r1 = { 0.0f, 1.0f, 0.0f, 0.0f };
@@ -41,7 +38,7 @@ MAT4_INLINE void mat4_make_identity(mat4 m)
 	vec4_copy(r3, m[3]);
 }
 
-MAT4_INLINE void mat4_make_zero(mat4 m)
+M_INLINE void mat4_make_zero(mat4 m)
 {
 	vec4 v0 = { 0.0f, 0.0f, 0.0f, 0.0f };
 
@@ -52,7 +49,7 @@ MAT4_INLINE void mat4_make_zero(mat4 m)
 }
 
 
-MAT4_INLINE void mat4_translate(mat4 m, vec3 dist)
+M_INLINE void mat4_translate(mat4 m, vec3 dist)
 {
 	vec4 v1, v2, v3;
 	
@@ -65,7 +62,7 @@ MAT4_INLINE void mat4_translate(mat4 m, vec3 dist)
 	vec4_add(v3, m[3], m[3]);
 }
 
-MAT4_INLINE void mat4_scale(mat4 m, vec3 scale, mat4 dest)
+M_INLINE void mat4_scale(mat4 m, vec3 scale, mat4 dest)
 {
 	vec4_mul_f(m[0], scale[0], dest[0]);
 	vec4_mul_f(m[1], scale[1], dest[1]);
@@ -74,7 +71,7 @@ MAT4_INLINE void mat4_scale(mat4 m, vec3 scale, mat4 dest)
 	vec4_copy(m[3], dest[3]);
 }
 
-MAT4_INLINE void mat4_rotate_make(mat4 m, float angle, vec3 axis)
+M_INLINE void mat4_rotate_make(mat4 m, float angle, vec3 axis)
 {
 	// @NOTE: yoinked straight from cglm, look this up
 	vec3 axisn, v, vs;
@@ -96,7 +93,7 @@ MAT4_INLINE void mat4_rotate_make(mat4 m, float angle, vec3 axis)
 	m[3][3] = 1.0f;
 }
 
-MAT4_INLINE void mat4_mul_rot(mat4 m1, mat4 m2, mat4 dest)
+M_INLINE void mat4_mul_rot(mat4 m1, mat4 m2, mat4 dest)
 {
 	// @NOTE: yoinked straight from cglm, look this up
 	float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2], a03 = m1[0][3];
@@ -129,7 +126,7 @@ MAT4_INLINE void mat4_mul_rot(mat4 m1, mat4 m2, mat4 dest)
 	dest[3][3] = a33;
 }
 
-MAT4_INLINE void mat4_rotate(mat4 m, float deg, vec3 axis)
+M_INLINE void mat4_rotate(mat4 m, float deg, vec3 axis)
 {
 	// @NOTE: yoinked straight from cglm, look this up
 	mat4 r;
@@ -137,7 +134,7 @@ MAT4_INLINE void mat4_rotate(mat4 m, float deg, vec3 axis)
 	mat4_mul_rot(m, r, m);
 }
 
-MAT4_INLINE void mat4_rotate_at(mat4 m, vec3 point, float deg, vec3 axis)
+M_INLINE void mat4_rotate_at(mat4 m, vec3 point, float deg, vec3 axis)
 {
 	// @NOTE: yoinked straight from cglm, look this up
 	vec3 p_inv;
@@ -148,7 +145,7 @@ MAT4_INLINE void mat4_rotate_at(mat4 m, vec3 point, float deg, vec3 axis)
 	mat4_translate(m, p_inv);
 }
 
-MAT4_INLINE void mat4_lookat(vec3 pos, vec3 center, vec3 up, mat4 dest) 
+M_INLINE void mat4_lookat(vec3 pos, vec3 center, vec3 up, mat4 dest) 
 {
 	// @NOTE: yoinked straight from cglm, look this up
 	vec3 f, u, s;
@@ -179,7 +176,7 @@ MAT4_INLINE void mat4_lookat(vec3 pos, vec3 center, vec3 up, mat4 dest)
 
 // @TODO: remove all calcs not needed in 2d
 // helper function, making it easier for 2d
-MAT4_INLINE void mat4_lookat_2d(vec2 pos, float zoom, mat4 dest)
+M_INLINE void mat4_lookat_2d(vec2 pos, float zoom, mat4 dest)
 {
 	vec3 center;
 	center[0] = pos[0];
@@ -189,7 +186,7 @@ MAT4_INLINE void mat4_lookat_2d(vec2 pos, float zoom, mat4 dest)
 	mat4_lookat(VEC3_XYZ(pos[0], pos[1], -zoom), center, VEC3_Y(1), dest);
 }
 
-MAT4_INLINE void mat4_perspective(float fovy, float aspect, float near_val, float far_val, mat4  dest) 
+M_INLINE void mat4_perspective(float fovy, float aspect, float near_val, float far_val, mat4  dest) 
 {
 	// @NOTE: yoinked straight from cglm, look this up
 	float f, fn;
@@ -206,7 +203,7 @@ MAT4_INLINE void mat4_perspective(float fovy, float aspect, float near_val, floa
   	dest[3][2] = 2.0f * near_val * far_val * fn;
 }
 
-// MAT4_INLINE void mat4_ortho(int w, int h, mat4 dest)
+// M_INLINE void mat4_ortho(int w, int h, mat4 dest)
 // {
 //   // src: https://www.youtube.com/watch?v=x_XLm9Uj_V4
 // 	vec4 r0 = { 1/w , 0.0f, 0.0f, 0.0f };
@@ -221,7 +218,8 @@ MAT4_INLINE void mat4_perspective(float fovy, float aspect, float near_val, floa
 // 
 // }
 
-MAT4_INLINE void mat4_ortho(float left, float right, float bottom,  float top, float nearVal, float farVal, mat4  dest) 
+// unsure if works
+M_INLINE void mat4_ortho_clip(float left, float right, float bottom,  float top, float nearVal, float farVal, mat4  dest) 
 {
 	// @NOTE: yoinked straight from cglm, look this up
   float rl, tb, fn;
@@ -237,8 +235,19 @@ MAT4_INLINE void mat4_ortho(float left, float right, float bottom,  float top, f
   dest[3][2] = (farVal + nearVal) * fn;
   dest[3][3] = 1.0f; 
 }
+// unsure if works
+M_INLINE void mat4_ortho(float left, float right, float bottom, float top, mat4 dest)
+{
+	// @NOTE: yoinked straight from glm, look this up
+  mat4_make_zero(dest);  
+  dest[0][0] = 2.0f / (right - left);
+  dest[1][1] = 2.0f / (top - bottom);
+  dest[2][2] = - 1.0f;
+  dest[3][0] = - (right + left) / (right - left);
+  dest[3][1] = - (top + bottom) / (top - bottom);
+}
 
-MAT4_INLINE void mat4_make_model(mat4 model, vec3 pos, vec3 rot, vec3 scale)
+M_INLINE void mat4_make_model(mat4 model, vec3 pos, vec3 rot, vec3 scale)
 {
 	mat4_make_identity(model);
 	float x = rot[0];  m_deg_to_rad(&x);
@@ -256,7 +265,7 @@ MAT4_INLINE void mat4_make_model(mat4 model, vec3 pos, vec3 rot, vec3 scale)
 }
 
 // helper function, removes calcs not needed or 2d
-MAT4_INLINE void mat4_make_model_2d(vec2 pos, vec2 size, float rot, mat4 model)
+M_INLINE void mat4_make_model_2d(vec2 pos, vec2 size, float rot, mat4 model)
 {
 	vec3 pos3  = { pos[0], pos[1], 0.0f };
 	vec3 size3 = { size[0], size[1], 1.0f };

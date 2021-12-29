@@ -19,7 +19,8 @@ typedef int ivec2[2];   // v[0]: x, v[1]: y
 
 
 // ---- print util ----
-#define P_IVEC2(v) 	printf("|%s| x: %.2f, y: %.2f\n", #v, v[0], v[1])
+#define P_IVEC2(v) 	    printf("|%s| x: %.2f, y: %.2f\n", #v, v[0], v[1])
+#define P_IL_IVEC2(v) 	printf("|%s| x: %.2f, y: %.2f", #v, v[0], v[1])
 
 
 // ---- ivec2 ----

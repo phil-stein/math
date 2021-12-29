@@ -36,6 +36,12 @@ typedef int           c_hex;      // 0xFF0000 rrggbb, 0xFF0000FF rrggbbaa
 #define P_RGBF(c)   printf("RGBF  | %s | r: %.2f, g: %.2f, b: %.2f\n", #c, c[0], c[1], c[2])
 #define P_RGBAF(c)  printf("RGBFA | %s | r: %.2f, g: %.2f, b: %.2f, a: %.2f\n", #c, c[0], c[1], c[2], c[3])
 
+#define P_IL_RGB(c)    printf("RGB   | %s | r: %.3d, g: %.3d, b: %.3d", #c, (int)c[0], (int)c[1], (int)c[2])
+#define P_IL_RGBA(c)   printf("RGBA  | %s | r: %.3d, g: %.3d, b: %.3d, a: %.3d", #c, (int)c[0], (int)c[1], (int)c[2], (int)c[3])
+#define P_IL_RGBF(c)   printf("RGBF  | %s | r: %.2f, g: %.2f, b: %.2f", #c, c[0], c[1], c[2])
+#define P_IL_RGBAF(c)  printf("RGBFA | %s | r: %.2f, g: %.2f, b: %.2f, a: %.2f", #c, c[0], c[1], c[2], c[3])
+
+
 
 // ---- copy ----
 

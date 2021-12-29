@@ -21,7 +21,8 @@ typedef int ivec3[3];   // v[0]: x, v[1]: y, v[2]: z
 #define VEC3_Z(z)		(vec3){ 0, 0, z }
 
 
-#define P_VEC3(v) 	printf("|%s| x: %.2f, y: %.2f, z: %.2f\n", #v, v[0], v[1], v[2])
+#define P_VEC3(v) 	  printf("|%s| x: %.2f, y: %.2f, z: %.2f\n", #v, v[0], v[1], v[2])
+#define P_IL_VEC3(v) 	printf("|%s| x: %.2f, y: %.2f, z: %.2f", #v, v[0], v[1], v[2])
 
 
 // ---- vec3 ----
