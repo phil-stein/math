@@ -247,7 +247,7 @@ M_INLINE void mat4_ortho(float left, float right, float bottom, float top, mat4 
   dest[3][1] = - (top + bottom) / (top - bottom);
 }
 
-M_INLINE void mat4_make_model(mat4 model, vec3 pos, vec3 rot, vec3 scale)
+M_INLINE void mat4_make_model(vec3 pos, vec3 rot, vec3 scale, mat4 model)
 {
 	mat4_make_identity(model);
 	float x = rot[0];  m_deg_to_rad(&x);
@@ -261,7 +261,6 @@ M_INLINE void mat4_make_model(mat4 model, vec3 pos, vec3 rot, vec3 scale)
 	mat4_translate(model, pos);
 
 	mat4_scale(model, scale, model);
-
 }
 
 // helper function, removes calcs not needed or 2d
