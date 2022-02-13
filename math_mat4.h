@@ -203,23 +203,7 @@ M_INLINE void mat4_perspective(float fovy, float aspect, float near_val, float f
   	dest[3][2] = 2.0f * near_val * far_val * fn;
 }
 
-// M_INLINE void mat4_ortho(int w, int h, mat4 dest)
-// {
-//   // src: https://www.youtube.com/watch?v=x_XLm9Uj_V4
-// 	vec4 r0 = { 1/w , 0.0f, 0.0f, 0.0f };
-// 	vec4 r1 = { 0.0f, -2/h , 0.0f, 0.0f };
-// 	vec4 r2 = { 0.0f, 0.0f, 1.0f, 0.0f };
-// 	vec4 r3 = { -1.f, 1.0f, 0.0f, 1.0f };
-// 
-// 	vec4_copy(r0, dest[0]);
-// 	vec4_copy(r1, dest[1]);
-// 	vec4_copy(r2, dest[2]);
-// 	vec4_copy(r3, dest[3]);
-// 
-// }
-
-// unsure if works
-M_INLINE void mat4_ortho_clip(float left, float right, float bottom,  float top, float nearVal, float farVal, mat4  dest) 
+M_INLINE void mat4_ortho(float left, float right, float bottom,  float top, float nearVal, float farVal, mat4  dest) 
 {
 	// @NOTE: yoinked straight from cglm, look this up
   float rl, tb, fn;
@@ -235,17 +219,7 @@ M_INLINE void mat4_ortho_clip(float left, float right, float bottom,  float top,
   dest[3][2] = (farVal + nearVal) * fn;
   dest[3][3] = 1.0f; 
 }
-// unsure if works
-M_INLINE void mat4_ortho(float left, float right, float bottom, float top, mat4 dest)
-{
-	// @NOTE: yoinked straight from glm, look this up
-  mat4_make_zero(dest);  
-  dest[0][0] = 2.0f / (right - left);
-  dest[1][1] = 2.0f / (top - bottom);
-  dest[2][2] = - 1.0f;
-  dest[3][0] = - (right + left) / (right - left);
-  dest[3][1] = - (top + bottom) / (top - bottom);
-}
+
 
 M_INLINE void mat4_make_model(vec3 pos, vec3 rot, vec3 scale, mat4 model)
 {
