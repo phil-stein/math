@@ -48,6 +48,20 @@ M_INLINE void mat4_make_zero(mat4 m)
 	vec4_copy(v0, m[3]);
 }
 
+M_INLINE void mat4_set_pos(float x, float y, float z, mat4 dest)
+{
+  dest[3][0] = x;
+  dest[3][1] = y;
+  dest[3][2] = z;
+}
+
+M_INLINE void mat4_copy(mat4 m, mat4 dest)
+{
+  vec4_copy(m[0], dest[0]);
+  vec4_copy(m[1], dest[1]);
+  vec4_copy(m[2], dest[2]);
+  vec4_copy(m[3], dest[3]);
+}
 
 M_INLINE void mat4_translate(mat4 m, vec3 dist)
 {
