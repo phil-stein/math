@@ -17,12 +17,14 @@
 
 
 #include <math.h>
+#include <inttypes.h>
 #include "math_m.h"
 #include "math_vec2.h"
 #include "math_vec3.h"
 #include "math_vec4.h"
 #include "math_mat4.h"
 #include "math_color.h"
+#include "math_rand.h"
 
 #endif
 

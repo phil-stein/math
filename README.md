@@ -19,4 +19,7 @@ features:
   - [ ] mat3
   - [x] mat4
   - [ ] simd!
+  - [ ] rand
+    - [ ] random int / long long
+    - [ ] perlin / simplex
 
