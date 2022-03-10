@@ -27,63 +27,63 @@ typedef int ivec3[3];   // v[0]: x, v[1]: y, v[2]: z
 
 // ---- vec3 ----
 
-M_INLINE void vec3_add(vec3 a, vec3 b, vec3 dest)
+M_INLINE void vec3_add(vec3 a, vec3 b, vec3 out)
 {
-	dest[0] = a[0] + b[0];
-	dest[1] = a[1] + b[1];
-	dest[2] = a[2] + b[2];
+	out[0] = a[0] + b[0];
+	out[1] = a[1] + b[1];
+	out[2] = a[2] + b[2];
 }
-M_INLINE void vec3_add_f(vec3 a, float f, vec3 dest)
+M_INLINE void vec3_add_f(vec3 a, float f, vec3 out)
 {
-	dest[0] = a[0] + f;
-	dest[1] = a[1] + f;
-	dest[2] = a[2] + f;
-}
-
-M_INLINE void vec3_sub(vec3 a, vec3 b, vec3 dest)
-{
-	dest[0] = a[0] - b[0];
-	dest[1] = a[1] - b[1];
-	dest[2] = a[2] - b[2];
-}
-M_INLINE void vec3_sub_f(vec3 a, float f, vec3 dest)
-{
-	dest[0] = a[0] - f;
-	dest[1] = a[1] - f;
-	dest[2] = a[2] - f;
+	out[0] = a[0] + f;
+	out[1] = a[1] + f;
+	out[2] = a[2] + f;
 }
 
-M_INLINE void vec3_mul(vec3 a, vec3 b, vec3 dest)
+M_INLINE void vec3_sub(vec3 a, vec3 b, vec3 out)
 {
-	dest[0] = a[0] * b[0];
-	dest[1] = a[1] * b[1];
-	dest[2] = a[2] * b[2];
+	out[0] = a[0] - b[0];
+	out[1] = a[1] - b[1];
+	out[2] = a[2] - b[2];
 }
-M_INLINE void vec3_mul_f(vec3 a, float f, vec3 dest)
+M_INLINE void vec3_sub_f(vec3 a, float f, vec3 out)
 {
-	dest[0] = a[0] * f;
-	dest[1] = a[1] * f;
-	dest[2] = a[2] * f;
-}
-
-M_INLINE void vec3_div(vec3 a, vec3 b, vec3 dest)
-{
-	dest[0] = a[0] / b[0];
-	dest[1] = a[1] / b[1];
-	dest[2] = a[2] / b[2];
-}
-M_INLINE void vec3_div_f(vec3 a, float f, vec3 dest)
-{
-	dest[0] = a[0] / f;
-	dest[1] = a[1] / f;
-	dest[2] = a[2] / f;
+	out[0] = a[0] - f;
+	out[1] = a[1] - f;
+	out[2] = a[2] - f;
 }
 
-M_INLINE void vec3_cross(vec3 a, vec3 b, vec3 dest)
+M_INLINE void vec3_mul(vec3 a, vec3 b, vec3 out)
 {
-	dest[0] = a[1] * b[2] - a[2] * b[1];
-	dest[1] = a[2] * b[0] - a[0] * b[2];
-	dest[2] = a[0] * b[1] - a[1] * b[0];
+	out[0] = a[0] * b[0];
+	out[1] = a[1] * b[1];
+	out[2] = a[2] * b[2];
+}
+M_INLINE void vec3_mul_f(vec3 a, float f, vec3 out)
+{
+	out[0] = a[0] * f;
+	out[1] = a[1] * f;
+	out[2] = a[2] * f;
+}
+
+M_INLINE void vec3_div(vec3 a, vec3 b, vec3 out)
+{
+	out[0] = a[0] / b[0];
+	out[1] = a[1] / b[1];
+	out[2] = a[2] / b[2];
+}
+M_INLINE void vec3_div_f(vec3 a, float f, vec3 out)
+{
+	out[0] = a[0] / f;
+	out[1] = a[1] / f;
+	out[2] = a[2] / f;
+}
+
+M_INLINE void vec3_cross(vec3 a, vec3 b, vec3 out)
+{
+	out[0] = a[1] * b[2] - a[2] * b[1];
+	out[1] = a[2] * b[0] - a[0] * b[2];
+	out[2] = a[0] * b[1] - a[1] * b[0];
 }
 
 M_INLINE float vec3_dot(vec3 a, vec3 b)
@@ -96,25 +96,25 @@ M_INLINE float vec3_magnitude(vec3 a)
 	return sqrtf((a[0] * a[0]) + (a[1] * a[1]) + (a[2] * a[2]));
 }
 
-M_INLINE void vec3_copy(vec3 a, vec3 dest)
+M_INLINE void vec3_copy(vec3 a, vec3 out)
 {
-	dest[0] = a[0];
-	dest[1] = a[1];
-	dest[2] = a[2];
+	out[0] = a[0];
+	out[1] = a[1];
+	out[2] = a[2];
 }
 
-M_INLINE void vec3_negate(vec3 a, vec3 dest)
+M_INLINE void vec3_negate(vec3 a, vec3 out)
 {
-	dest[0] = -a[0];
-	dest[1] = -a[1];
-	dest[2] = -a[2];
+	out[0] = -a[0];
+	out[1] = -a[1];
+	out[2] = -a[2];
 }
 
-M_INLINE void vec3_normalize(vec3 a, vec3 dest)
+M_INLINE void vec3_normalize(vec3 a, vec3 out)
 {
-	vec3_copy(a, dest);
-	float mag = vec3_magnitude(dest);
-	vec3_div_f(dest, mag, dest);
+	vec3_copy(a, out);
+	float mag = vec3_magnitude(out);
+	vec3_div_f(out, mag, out);
 }
 
 M_INLINE float vec3_distance(vec3 a, vec3 b)
@@ -124,25 +124,25 @@ M_INLINE float vec3_distance(vec3 a, vec3 b)
 	return vec3_magnitude(d); 
 }
 
-M_INLINE void vec3_clamp(vec3 a, vec3 min, vec3 max, vec3 dest)
+M_INLINE void vec3_clamp(vec3 a, vec3 min, vec3 max, vec3 out)
 {
-	dest[0] = CLAMP(a[0], min[0], max[0]);
-	dest[1] = CLAMP(a[1], min[1], max[1]);
-	dest[2] = CLAMP(a[2], min[2], max[2]);
+	out[0] = CLAMP(a[0], min[0], max[0]);
+	out[1] = CLAMP(a[1], min[1], max[1]);
+	out[2] = CLAMP(a[2], min[2], max[2]);
 }
 
-M_INLINE void vec3_clamp_f(vec3 a, float min, float max, vec3 dest)
+M_INLINE void vec3_clamp_f(vec3 a, float min, float max, vec3 out)
 {
-	dest[0] = CLAMP(a[0], min, max);
-	dest[1] = CLAMP(a[1], min, max);
-	dest[2] = CLAMP(a[2], min, max);
+	out[0] = CLAMP(a[0], min, max);
+	out[1] = CLAMP(a[1], min, max);
+	out[2] = CLAMP(a[2], min, max);
 }
 
-M_INLINE void vec3_abs(vec3 a, vec3 dest)
+M_INLINE void vec3_abs(vec3 a, vec3 out)
 {
-	dest[0] = fabsf(a[0]);
-	dest[1] = fabsf(a[1]);
-	dest[2] = fabsf(a[2]);
+	out[0] = fabsf(a[0]);
+	out[1] = fabsf(a[1]);
+	out[2] = fabsf(a[2]);
 }
 
 

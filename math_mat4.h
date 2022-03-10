@@ -48,19 +48,19 @@ M_INLINE void mat4_make_zero(mat4 m)
 	vec4_copy(v0, m[3]);
 }
 
-M_INLINE void mat4_set_pos(float x, float y, float z, mat4 dest)
+M_INLINE void mat4_set_pos(float x, float y, float z, mat4 out)
 {
-  dest[3][0] = x;
-  dest[3][1] = y;
-  dest[3][2] = z;
+  out[3][0] = x;
+  out[3][1] = y;
+  out[3][2] = z;
 }
 
-M_INLINE void mat4_copy(mat4 m, mat4 dest)
+M_INLINE void mat4_copy(mat4 m, mat4 out)
 {
-  vec4_copy(m[0], dest[0]);
-  vec4_copy(m[1], dest[1]);
-  vec4_copy(m[2], dest[2]);
-  vec4_copy(m[3], dest[3]);
+  vec4_copy(m[0], out[0]);
+  vec4_copy(m[1], out[1]);
+  vec4_copy(m[2], out[2]);
+  vec4_copy(m[3], out[3]);
 }
 
 M_INLINE void mat4_translate(mat4 m, vec3 dist)
@@ -76,16 +76,16 @@ M_INLINE void mat4_translate(mat4 m, vec3 dist)
 	vec4_add(v3, m[3], m[3]);
 }
 
-M_INLINE void mat4_scale(mat4 m, vec3 scale, mat4 dest)
+M_INLINE void mat4_scale(mat4 m, vec3 scale, mat4 out)
 {
-	vec4_mul_f(m[0], scale[0], dest[0]);
-	vec4_mul_f(m[1], scale[1], dest[1]);
-	vec4_mul_f(m[2], scale[2], dest[2]);
+	vec4_mul_f(m[0], scale[0], out[0]);
+	vec4_mul_f(m[1], scale[1], out[1]);
+	vec4_mul_f(m[2], scale[2], out[2]);
 
-	vec4_copy(m[3], dest[3]);
+	vec4_copy(m[3], out[3]);
 }
 
-M_INLINE void mat4_mul(mat4 a, mat4 b, mat4 dest)
+M_INLINE void mat4_mul(mat4 a, mat4 b, mat4 out)
 {
   // taken straight from cglm
   float a00 = a[0][0], a01 = a[0][1], a02 = a[0][2], a03 = a[0][3],
@@ -98,22 +98,32 @@ M_INLINE void mat4_mul(mat4 a, mat4 b, mat4 dest)
         b20 = b[2][0], b21 = b[2][1], b22 = b[2][2], b23 = b[2][3],
         b30 = b[3][0], b31 = b[3][1], b32 = b[3][2], b33 = b[3][3];
 
-  dest[0][0] = a00 * b00 + a10 * b01 + a20 * b02 + a30 * b03;
-  dest[0][1] = a01 * b00 + a11 * b01 + a21 * b02 + a31 * b03;
-  dest[0][2] = a02 * b00 + a12 * b01 + a22 * b02 + a32 * b03;
-  dest[0][3] = a03 * b00 + a13 * b01 + a23 * b02 + a33 * b03;
-  dest[1][0] = a00 * b10 + a10 * b11 + a20 * b12 + a30 * b13;
-  dest[1][1] = a01 * b10 + a11 * b11 + a21 * b12 + a31 * b13;
-  dest[1][2] = a02 * b10 + a12 * b11 + a22 * b12 + a32 * b13;
-  dest[1][3] = a03 * b10 + a13 * b11 + a23 * b12 + a33 * b13;
-  dest[2][0] = a00 * b20 + a10 * b21 + a20 * b22 + a30 * b23;
-  dest[2][1] = a01 * b20 + a11 * b21 + a21 * b22 + a31 * b23;
-  dest[2][2] = a02 * b20 + a12 * b21 + a22 * b22 + a32 * b23;
-  dest[2][3] = a03 * b20 + a13 * b21 + a23 * b22 + a33 * b23;
-  dest[3][0] = a00 * b30 + a10 * b31 + a20 * b32 + a30 * b33;
-  dest[3][1] = a01 * b30 + a11 * b31 + a21 * b32 + a31 * b33;
-  dest[3][2] = a02 * b30 + a12 * b31 + a22 * b32 + a32 * b33;
-  dest[3][3] = a03 * b30 + a13 * b31 + a23 * b32 + a33 * b33;
+  out[0][0] = a00 * b00 + a10 * b01 + a20 * b02 + a30 * b03;
+  out[0][1] = a01 * b00 + a11 * b01 + a21 * b02 + a31 * b03;
+  out[0][2] = a02 * b00 + a12 * b01 + a22 * b02 + a32 * b03;
+  out[0][3] = a03 * b00 + a13 * b01 + a23 * b02 + a33 * b03;
+  out[1][0] = a00 * b10 + a10 * b11 + a20 * b12 + a30 * b13;
+  out[1][1] = a01 * b10 + a11 * b11 + a21 * b12 + a31 * b13;
+  out[1][2] = a02 * b10 + a12 * b11 + a22 * b12 + a32 * b13;
+  out[1][3] = a03 * b10 + a13 * b11 + a23 * b12 + a33 * b13;
+  out[2][0] = a00 * b20 + a10 * b21 + a20 * b22 + a30 * b23;
+  out[2][1] = a01 * b20 + a11 * b21 + a21 * b22 + a31 * b23;
+  out[2][2] = a02 * b20 + a12 * b21 + a22 * b22 + a32 * b23;
+  out[2][3] = a03 * b20 + a13 * b21 + a23 * b22 + a33 * b23;
+  out[3][0] = a00 * b30 + a10 * b31 + a20 * b32 + a30 * b33;
+  out[3][1] = a01 * b30 + a11 * b31 + a21 * b32 + a31 * b33;
+  out[3][2] = a02 * b30 + a12 * b31 + a22 * b32 + a32 * b33;
+  out[3][3] = a03 * b30 + a13 * b31 + a23 * b32 + a33 * b33;
+}
+
+M_INLINE void mat4_mul_v(mat4 m, vec4 v, vec4 out)
+{
+  vec4 tmp;
+  tmp[0] = m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2] + m[3][0] * v[3];
+  tmp[1] = m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2] + m[3][1] * v[3];
+  tmp[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2] + m[3][2] * v[3];
+  tmp[3] = m[0][3] * v[0] + m[1][3] * v[1] + m[2][3] * v[2] + m[3][3] * v[3];
+  vec4_copy(tmp, out);
 }
 
 M_INLINE void mat4_rotate_make(mat4 m, float angle, vec3 axis)
@@ -138,7 +148,7 @@ M_INLINE void mat4_rotate_make(mat4 m, float angle, vec3 axis)
 	m[3][3] = 1.0f;
 }
 
-M_INLINE void mat4_mul_rot(mat4 m1, mat4 m2, mat4 dest)
+M_INLINE void mat4_mul_rot(mat4 m1, mat4 m2, mat4 out)
 {
 	// @NOTE: yoinked straight from cglm, look this up
 	float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2], a03 = m1[0][3];
@@ -150,25 +160,25 @@ M_INLINE void mat4_mul_rot(mat4 m1, mat4 m2, mat4 dest)
 	float b10 = m2[1][0], b11 = m2[1][1], b12 = m2[1][2];
 	float b20 = m2[2][0], b21 = m2[2][1], b22 = m2[2][2];
 
-	dest[0][0] = a00 * b00 + a10 * b01 + a20 * b02;
-	dest[0][1] = a01 * b00 + a11 * b01 + a21 * b02;
-	dest[0][2] = a02 * b00 + a12 * b01 + a22 * b02;
-	dest[0][3] = a03 * b00 + a13 * b01 + a23 * b02;
+	out[0][0] = a00 * b00 + a10 * b01 + a20 * b02;
+	out[0][1] = a01 * b00 + a11 * b01 + a21 * b02;
+	out[0][2] = a02 * b00 + a12 * b01 + a22 * b02;
+	out[0][3] = a03 * b00 + a13 * b01 + a23 * b02;
 
-	dest[1][0] = a00 * b10 + a10 * b11 + a20 * b12;
-	dest[1][1] = a01 * b10 + a11 * b11 + a21 * b12;
-	dest[1][2] = a02 * b10 + a12 * b11 + a22 * b12;
-	dest[1][3] = a03 * b10 + a13 * b11 + a23 * b12;
+	out[1][0] = a00 * b10 + a10 * b11 + a20 * b12;
+	out[1][1] = a01 * b10 + a11 * b11 + a21 * b12;
+	out[1][2] = a02 * b10 + a12 * b11 + a22 * b12;
+	out[1][3] = a03 * b10 + a13 * b11 + a23 * b12;
 
-	dest[2][0] = a00 * b20 + a10 * b21 + a20 * b22;
-	dest[2][1] = a01 * b20 + a11 * b21 + a21 * b22;
-	dest[2][2] = a02 * b20 + a12 * b21 + a22 * b22;
-	dest[2][3] = a03 * b20 + a13 * b21 + a23 * b22;
+	out[2][0] = a00 * b20 + a10 * b21 + a20 * b22;
+	out[2][1] = a01 * b20 + a11 * b21 + a21 * b22;
+	out[2][2] = a02 * b20 + a12 * b21 + a22 * b22;
+	out[2][3] = a03 * b20 + a13 * b21 + a23 * b22;
 
-	dest[3][0] = a30;
-	dest[3][1] = a31;
-	dest[3][2] = a32;
-	dest[3][3] = a33;
+	out[3][0] = a30;
+	out[3][1] = a31;
+	out[3][2] = a32;
+	out[3][3] = a33;
 }
 
 M_INLINE void mat4_rotate(mat4 m, float deg, vec3 axis)
@@ -190,7 +200,7 @@ M_INLINE void mat4_rotate_at(mat4 m, vec3 point, float deg, vec3 axis)
 	mat4_translate(m, p_inv);
 }
 
-M_INLINE void mat4_lookat(vec3 pos, vec3 center, vec3 up, mat4 dest) 
+M_INLINE void mat4_lookat(vec3 pos, vec3 center, vec3 up, mat4 out) 
 {
 	// @NOTE: yoinked straight from cglm, look this up
 	vec3 f, u, s;
@@ -202,67 +212,67 @@ M_INLINE void mat4_lookat(vec3 pos, vec3 center, vec3 up, mat4 dest)
 	vec3_normalize(s, s);
 	vec3_cross(s, f, u);
 
-	dest[0][0] =  s[0];
-	dest[0][1] =  u[0];
-	dest[0][2] = -f[0];
-	dest[1][0] =  s[1];
-	dest[1][1] =  u[1];
-	dest[1][2] = -f[1];
-	dest[2][0] =  s[2];
-	dest[2][1] =  u[2];
-	dest[2][2] = -f[2];
-	dest[3][0] = -vec3_dot(s, pos);
-	dest[3][1] = -vec3_dot(u, pos);
-	dest[3][2] =  vec3_dot(f, pos);
-	dest[0][3] =  dest[1][3] = dest[2][3] = 0.0f;
-	dest[3][3] =  1.0f;
+	out[0][0] =  s[0];
+	out[0][1] =  u[0];
+	out[0][2] = -f[0];
+	out[1][0] =  s[1];
+	out[1][1] =  u[1];
+	out[1][2] = -f[1];
+	out[2][0] =  s[2];
+	out[2][1] =  u[2];
+	out[2][2] = -f[2];
+	out[3][0] = -vec3_dot(s, pos);
+	out[3][1] = -vec3_dot(u, pos);
+	out[3][2] =  vec3_dot(f, pos);
+	out[0][3] =  out[1][3] = out[2][3] = 0.0f;
+	out[3][3] =  1.0f;
 
 }
 
 // @TODO: remove all calcs not needed in 2d
 // helper function, making it easier for 2d
-M_INLINE void mat4_lookat_2d(vec2 pos, float zoom, mat4 dest)
+M_INLINE void mat4_lookat_2d(vec2 pos, float zoom, mat4 out)
 {
 	vec3 center;
 	center[0] = pos[0];
 	center[1] = pos[1];
 	center[2] = -1.0f;
 
-	mat4_lookat(VEC3_XYZ(pos[0], pos[1], -zoom), center, VEC3_Y(1), dest);
+	mat4_lookat(VEC3_XYZ(pos[0], pos[1], -zoom), center, VEC3_Y(1), out);
 }
 
-M_INLINE void mat4_perspective(float fovy, float aspect, float near_val, float far_val, mat4  dest) 
+M_INLINE void mat4_perspective(float fovy, float aspect, float near_val, float far_val, mat4  out) 
 {
 	// @NOTE: yoinked straight from cglm, look this up
 	float f, fn;
 
-  	mat4_make_zero(dest);
+  	mat4_make_zero(out);
 
   	f  = 1.0f / tanf(fovy * 0.5f);
   	fn = 1.0f / (near_val - far_val);
 
-  	dest[0][0] = f / aspect;
-  	dest[1][1] = f;
-  	dest[2][2] = (near_val + far_val) * fn;
-  	dest[2][3] = -1.0f;
-  	dest[3][2] = 2.0f * near_val * far_val * fn;
+  	out[0][0] = f / aspect;
+  	out[1][1] = f;
+  	out[2][2] = (near_val + far_val) * fn;
+  	out[2][3] = -1.0f;
+  	out[3][2] = 2.0f * near_val * far_val * fn;
 }
 
-M_INLINE void mat4_ortho(float left, float right, float bottom,  float top, float nearVal, float farVal, mat4  dest) 
+M_INLINE void mat4_ortho(float left, float right, float bottom,  float top, float nearVal, float farVal, mat4  out) 
 {
 	// @NOTE: yoinked straight from cglm, look this up
   float rl, tb, fn;
-  mat4_make_zero(dest);  
+  mat4_make_zero(out);  
   rl = 1.0f / (right  - left);
   tb = 1.0f / (top    - bottom);   
   fn =-1.0f / (farVal - nearVal);
-  dest[0][0] = 2.0f * rl;
-  dest[1][1] = 2.0f * tb;
-  dest[2][2] = 2.0f * fn;
-  dest[3][0] =-(right  + left)    * rl;
-  dest[3][1] =-(top    + bottom)  * tb;
-  dest[3][2] = (farVal + nearVal) * fn;
-  dest[3][3] = 1.0f; 
+  out[0][0] = 2.0f * rl;
+  out[1][1] = 2.0f * tb;
+  out[2][2] = 2.0f * fn;
+  out[3][0] =-(right  + left)    * rl;
+  out[3][1] =-(top    + bottom)  * tb;
+  out[3][2] = (farVal + nearVal) * fn;
+  out[3][3] = 1.0f; 
 }
 
 

@@ -45,104 +45,104 @@ typedef int           c_hex;      // 0xFF0000 rrggbb, 0xFF0000FF rrggbbaa
 
 // ---- copy ----
 
-M_INLINE void rgb_copy(rgb a, rgb dest)
+M_INLINE void rgb_copy(rgb a, rgb out)
 {
-  dest[0] = a[0];
-  dest[1] = a[1];
-  dest[2] = a[2];
+  out[0] = a[0];
+  out[1] = a[1];
+  out[2] = a[2];
 }
-M_INLINE void rgba_copy(rgba a, rgba dest)
+M_INLINE void rgba_copy(rgba a, rgba out)
 {
-  dest[0] = a[0];
-  dest[1] = a[1];
-  dest[2] = a[2];
-  dest[3] = a[3];
+  out[0] = a[0];
+  out[1] = a[1];
+  out[2] = a[2];
+  out[3] = a[3];
 }
-M_INLINE void rgbf_copy(rgbf a, rgbf dest)
+M_INLINE void rgbf_copy(rgbf a, rgbf out)
 {
-  dest[0] = a[0];
-  dest[1] = a[1];
-  dest[2] = a[2];
+  out[0] = a[0];
+  out[1] = a[1];
+  out[2] = a[2];
 }
-M_INLINE void rgbaf_copy(rgbaf a, rgbaf dest)
+M_INLINE void rgbaf_copy(rgbaf a, rgbaf out)
 {
-  dest[0] = a[0];
-  dest[1] = a[1];
-  dest[2] = a[2];
-  dest[3] = a[3];
+  out[0] = a[0];
+  out[1] = a[1];
+  out[2] = a[2];
+  out[3] = a[3];
 }
 
 
 // ---- type trunc ----
 
-M_INLINE void rgba_to_rgb(rgba a, rgb dest)
+M_INLINE void rgba_to_rgb(rgba a, rgb out)
 {
-  dest[0] = a[0];
-  dest[1] = a[1];
-  dest[2] = a[2];
+  out[0] = a[0];
+  out[1] = a[1];
+  out[2] = a[2];
 }
-M_INLINE void rgb_to_rgba(rgba a, c_byte alpha, rgb dest)
+M_INLINE void rgb_to_rgba(rgba a, c_byte alpha, rgb out)
 {
-  dest[0] = a[0];
-  dest[1] = a[1];
-  dest[2] = a[2];
-  dest[3] = alpha;
+  out[0] = a[0];
+  out[1] = a[1];
+  out[2] = a[2];
+  out[3] = alpha;
 }
-M_INLINE void rgbaf_to_rgbf(rgbaf a, rgbf dest)
+M_INLINE void rgbaf_to_rgbf(rgbaf a, rgbf out)
 {
-  dest[0] = a[0];
-  dest[1] = a[1];
-  dest[2] = a[2];
+  out[0] = a[0];
+  out[1] = a[1];
+  out[2] = a[2];
 }
-M_INLINE void rgbf_to_rgbaf(rgbaf a, float alpha, rgbf dest)
+M_INLINE void rgbf_to_rgbaf(rgbaf a, float alpha, rgbf out)
 {
-  dest[0] = a[0];
-  dest[1] = a[1];
-  dest[2] = a[2];
-  dest[3] = alpha;
+  out[0] = a[0];
+  out[1] = a[1];
+  out[2] = a[2];
+  out[3] = alpha;
 }
 
 
 // ---- conversion ----
 
-M_INLINE void rgb_to_rgbf(rgb a, rgbf dest)
+M_INLINE void rgb_to_rgbf(rgb a, rgbf out)
 {
-  dest[0] = a[0] / 256;
-  dest[1] = a[1] / 256;
-  dest[2] = a[2] / 256;
+  out[0] = a[0] / 256;
+  out[1] = a[1] / 256;
+  out[2] = a[2] / 256;
 }
-M_INLINE void rgba_to_rgbaf(rgba a, rgbaf dest)
+M_INLINE void rgba_to_rgbaf(rgba a, rgbaf out)
 {
-  dest[0] = a[0] / 256;
-  dest[1] = a[1] / 256;
-  dest[2] = a[2] / 256;
-  dest[3] = a[3] / 256;
+  out[0] = a[0] / 256;
+  out[1] = a[1] / 256;
+  out[2] = a[2] / 256;
+  out[3] = a[3] / 256;
 }
-M_INLINE void rgbf_to_rgb(rgbf a, rgb dest)
+M_INLINE void rgbf_to_rgb(rgbf a, rgb out)
 {
-  dest[0] = a[0] * 256;
-  dest[1] = a[1] * 256;
-  dest[2] = a[2] * 256;
+  out[0] = a[0] * 256;
+  out[1] = a[1] * 256;
+  out[2] = a[2] * 256;
 }
-M_INLINE void rgbaf_to_rgba(rgbaf a, rgba dest)
+M_INLINE void rgbaf_to_rgba(rgbaf a, rgba out)
 {
-  dest[0] = a[0] * 256;
-  dest[1] = a[1] * 256;
-  dest[2] = a[2] * 256;
-  dest[3] = a[3] * 256;
+  out[0] = a[0] * 256;
+  out[1] = a[1] * 256;
+  out[2] = a[2] * 256;
+  out[3] = a[3] * 256;
 }
-M_INLINE void hex_to_rgb(c_hex a, rgb dest)
+M_INLINE void hex_to_rgb(c_hex a, rgb out)
 {
-  dest[2] = ((a >> 8)  & 0xFF); // extract second byte
-  dest[1] = ((a >> 16) & 0xFF); // extract third byte
-  dest[0] = ((a >> 24) & 0xFF); // extract fourth byte
+  out[2] = ((a >> 8)  & 0xFF); // extract second byte
+  out[1] = ((a >> 16) & 0xFF); // extract third byte
+  out[0] = ((a >> 24) & 0xFF); // extract fourth byte
 }
-M_INLINE void hex_to_rgba(c_hex a, rgba dest)
+M_INLINE void hex_to_rgba(c_hex a, rgba out)
 {
-  dest[3] = ( a  & 0xFF);       // extract first byte
-  dest[2] = ((a >> 8)  & 0xFF); // extract second byte
-  dest[1] = ((a >> 16) & 0xFF); // extract third byte
-  dest[0] = ((a >> 24) & 0xFF); // extract fourth byte
+  out[3] = ( a  & 0xFF);       // extract first byte
+  out[2] = ((a >> 8)  & 0xFF); // extract second byte
+  out[1] = ((a >> 16) & 0xFF); // extract third byte
+  out[0] = ((a >> 24) & 0xFF); // extract fourth byte
 }
 M_INLINE c_hex rgb_to_hex(rgb a)
 {
