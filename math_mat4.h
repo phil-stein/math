@@ -55,6 +55,13 @@ M_INLINE void mat4_set_pos(float x, float y, float z, mat4 out)
   out[3][2] = z;
 }
 
+M_INLINE void mat4_get_pos(mat4 m, vec3 out)
+{
+  out[0] = m[3][0];
+  out[1] = m[3][1];
+  out[2] = m[3][2];
+}
+
 M_INLINE void mat4_copy(mat4 m, mat4 out)
 {
   vec4_copy(m[0], out[0]);
@@ -81,6 +88,15 @@ M_INLINE void mat4_scale(mat4 m, vec3 scale, mat4 out)
 	vec4_mul_f(m[0], scale[0], out[0]);
 	vec4_mul_f(m[1], scale[1], out[1]);
 	vec4_mul_f(m[2], scale[2], out[2]);
+
+	vec4_copy(m[3], out[3]);
+}
+
+M_INLINE void mat4_scale_f(mat4 m, float scale, mat4 out)
+{
+	vec4_mul_f(m[0], scale, out[0]);
+	vec4_mul_f(m[1], scale, out[1]);
+	vec4_mul_f(m[2], scale, out[2]);
 
 	vec4_copy(m[3], out[3]);
 }
@@ -124,6 +140,51 @@ M_INLINE void mat4_mul_v(mat4 m, vec4 v, vec4 out)
   tmp[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2] + m[3][2] * v[3];
   tmp[3] = m[0][3] * v[0] + m[1][3] * v[1] + m[2][3] * v[2] + m[3][3] * v[3];
   vec4_copy(tmp, out);
+}
+
+M_INLINE void mat4_inverse(mat4 mat, mat4 out)
+{
+  // taken straight from cglm
+  float t[6];
+  float det;
+  float a = mat[0][0], b = mat[0][1], c = mat[0][2], d = mat[0][3],
+  e = mat[1][0], f = mat[1][1], g = mat[1][2], h = mat[1][3],
+  i = mat[2][0], j = mat[2][1], k = mat[2][2], l = mat[2][3],
+  m = mat[3][0], n = mat[3][1], o = mat[3][2], p = mat[3][3];
+
+  t[0] = k * p - o * l; t[1] = j * p - n * l; t[2] = j * o - n * k;
+  t[3] = i * p - m * l; t[4] = i * o - m * k; t[5] = i * n - m * j;
+
+  out[0][0] =  f * t[0] - g * t[1] + h * t[2];
+  out[1][0] =-(e * t[0] - g * t[3] + h * t[4]);
+  out[2][0] =  e * t[1] - f * t[3] + h * t[5];
+  out[3][0] =-(e * t[2] - f * t[4] + g * t[5]);
+
+  out[0][1] =-(b * t[0] - c * t[1] + d * t[2]);
+  out[1][1] =  a * t[0] - c * t[3] + d * t[4];
+  out[2][1] =-(a * t[1] - b * t[3] + d * t[5]);
+  out[3][1] =  a * t[2] - b * t[4] + c * t[5];
+
+  t[0] = g * p - o * h; t[1] = f * p - n * h; t[2] = f * o - n * g;
+  t[3] = e * p - m * h; t[4] = e * o - m * g; t[5] = e * n - m * f;
+
+  out[0][2] =  b * t[0] - c * t[1] + d * t[2];
+  out[1][2] =-(a * t[0] - c * t[3] + d * t[4]);
+  out[2][2] =  a * t[1] - b * t[3] + d * t[5];
+  out[3][2] =-(a * t[2] - b * t[4] + c * t[5]);
+
+  t[0] = g * l - k * h; t[1] = f * l - j * h; t[2] = f * k - j * g;
+  t[3] = e * l - i * h; t[4] = e * k - i * g; t[5] = e * j - i * f;
+
+  out[0][3] =-(b * t[0] - c * t[1] + d * t[2]);
+  out[1][3] =  a * t[0] - c * t[3] + d * t[4];
+  out[2][3] =-(a * t[1] - b * t[3] + d * t[5]);
+  out[3][3] =  a * t[2] - b * t[4] + c * t[5];
+
+  det = 1.0f / (a * out[0][0] + b * out[1][0]
+      + c * out[2][0] + d * out[3][0]);
+
+  mat4_scale_f(out, det, out);
 }
 
 M_INLINE void mat4_rotate_make(mat4 m, float angle, vec3 axis)
