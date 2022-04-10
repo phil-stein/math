@@ -23,6 +23,11 @@ M_INLINE int rand_max()
   return RAND_MAX;
 }
 
+M_INLINE f32 rand_f32()
+{
+  return (f32)rand() / (f32)RAND_MAX;
+}
+
 M_INLINE uint64_t rand_u64()
 {
   uint64_t g = 0;

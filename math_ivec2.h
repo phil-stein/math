@@ -1,5 +1,5 @@
-#ifndef VEC2_MATH_H
-#define VEC2_MATH_H
+#ifndef IVEC2_MATH_H
+#define IVEC2_MATH_H
 
 #include "math_inc.h"
 
@@ -123,5 +123,33 @@ M_INLINE void ivec2_abs(ivec2 a, ivec2 out)
 	out[0] = abs(a[0]);
 	out[1] = abs(a[1]);
 }
+
+// ---- conditionals ----
+
+M_INLINE bool ivec2_equal(ivec2 a, ivec2 b)
+{
+  return a[0] == b[0] && a[1] == b[1];
+}
+M_INLINE bool ivec2_not_equal(ivec2 a, ivec2 b)
+{
+  return !ivec2_equal(a, b);
+}
+M_INLINE bool ivec2_greater(ivec2 a, ivec2 b)
+{
+  return a[0] > b[0] && a[1] > b[1];
+}
+M_INLINE bool ivec2_less(ivec2 a, ivec2 b)
+{
+  return a[0] < b[0] && a[1] < b[1];
+}
+M_INLINE bool ivec2_greater_eq(ivec2 a, ivec2 b)
+{
+  return a[0] >= b[0] && a[1] >= b[1];
+}
+M_INLINE bool ivec2_less_eq(ivec2 a, ivec2 b)
+{
+  return a[0] <= b[0] && a[1] <= b[1];
+}
+
 
 #endif
