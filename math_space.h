@@ -1,17 +1,19 @@
-#ifndef M_SPACE_H
-#define M_SPACE_H
+#ifndef MATH_MATH_SPACE_H
+#define MATH_MATM_SPACE_H
 
 // #include "math_inc.h"
 #include "math_mat4.h"
 #include "math_vec4.h"
 #include "math_vec3.h"
 
-// project screen coordinates into world space
-// pos_normalized:
-//    x: mouse-pos.x range -1 to 1
-//    y: mouse-pos.y range -1 to 1
-// depth: 
-//    dist range -1 to 1, between near & far plane
+// @DOC: project screen coordinates into world space
+//       view:           view matrix
+//       proj:           projection matrix
+//       pos_normalized:
+//                       x: mouse-pos.x range -1 to 1
+//                       y: mouse-pos.y range -1 to 1
+//       depth:          dist range -1 to 1, between near & far plane
+//       out:            gets set to world pos 
 M_INLINE void space_screen_to_world(mat4 view, mat4 proj, vec2 pos_normalized, float depth, vec3 out) 
 {  
   // taken from: https://stackoverflow.com/questions/7692988/opengl-math-projecting-screen-space-to-world-space-coords

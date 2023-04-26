@@ -1,5 +1,5 @@
-#ifndef IVEC2_MATH_H
-#define IVEC2_MATH_H
+#ifndef MATH_IVEC2_MATH_H
+#define MATH_IVEC2_MATH_H
 
 #include "math_inc.h"
 
@@ -75,7 +75,7 @@ M_INLINE int ivec2_dot(ivec2 a, ivec2 b)
 	return (a[0] * b[0]) + (a[1] * b[1]);
 }
 
-M_INLINE float ivec2_magnitude(ivec2 a)
+M_INLINE float ivec2_magnitude(ivec2 a) // length of vec
 {
 	return sqrtf((a[0] * a[0]) + (a[1] * a[1]));
 }

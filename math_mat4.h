@@ -1,17 +1,18 @@
-#ifndef MAT_MATH_H
-#define MAT_MATH_H
+#ifndef MATH_MAT_MATH_H
+#define MATH_MAT_MATH_H
 
 #include "math_inc.h"
 
-// mat4 row goes down
+// @DOC: mat4 row goes down (column-major i think)
 //
-// mat4[0]	  mat4[1]		  mat4[2]		  mat4[3]
-// mat4[0][0]	mat4[1][0]	mat4[2][0]	mat4[3][0]
-// mat4[0][1]	mat4[1][1]	mat4[2][1]	mat4[3][1]
-// mat4[0][2]	mat4[1][2]	mat4[2][2]	mat4[3][2]
-// mat4[0][3]	mat4[1][3]	mat4[2][3]	mat4[3][3]
+//       mat4[0]	  mat4[1]		  mat4[2]		  mat4[3]
+//       mat4[0][0]	mat4[1][0]	mat4[2][0]	mat4[3][0]
+//       mat4[0][1]	mat4[1][1]	mat4[2][1]	mat4[3][1]
+//       mat4[0][2]	mat4[1][2]	mat4[2][2]	mat4[3][2]
+//       mat4[0][3]	mat4[1][3]	mat4[2][3]	mat4[3][3]
 typedef float mat4[4][4];
 
+// @DOC: print mat4 type
 #define P_MAT4(m)	printf("%s:\n", #m);			\
 			printf("%.2f, %.2f, %.2f, %.2f\n", 	\
 			m[0][0], m[1][0], m[2][0], m[3][0]); 	\
@@ -24,7 +25,8 @@ typedef float mat4[4][4];
 
 
 
-
+// @DOC: make model matrix with no translation, rotation or scale
+//       m: this matrix will be set to identity matrix
 M_INLINE void mat4_make_identity(mat4 m)
 {
 	vec4 r0 = { 1.0f, 0.0f, 0.0f, 0.0f };
@@ -38,6 +40,8 @@ M_INLINE void mat4_make_identity(mat4 m)
 	vec4_copy(r3, m[3]);
 }
 
+// @DOC: set all values to zero in matrix
+//       m: this matrix will be set to zero
 M_INLINE void mat4_make_zero(mat4 m)
 {
 	vec4 v0 = { 0.0f, 0.0f, 0.0f, 0.0f };
@@ -48,6 +52,11 @@ M_INLINE void mat4_make_zero(mat4 m)
 	vec4_copy(v0, m[3]);
 }
 
+// @DOC: set postion value in a model matrix
+//       x:   x component od position
+//       y:   y component od position
+//       z:   z component od position
+//       out: this matrix will have its pos set 
 M_INLINE void mat4_set_pos(float x, float y, float z, mat4 out)
 {
   out[3][0] = x;
@@ -55,6 +64,9 @@ M_INLINE void mat4_set_pos(float x, float y, float z, mat4 out)
   out[3][2] = z;
 }
 
+// @DOC: get postion value out of a model matrix
+//       m:   model matrix to extract pos from
+//       out: will be set to position value
 M_INLINE void mat4_get_pos(mat4 m, vec3 out)
 {
   out[0] = m[3][0];
@@ -62,6 +74,9 @@ M_INLINE void mat4_get_pos(mat4 m, vec3 out)
   out[2] = m[3][2];
 }
 
+// @DOC: copy one matrix into another
+//       m:   matrix to source from
+//       out: matrix to copy into
 M_INLINE void mat4_copy(mat4 m, mat4 out)
 {
   vec4_copy(m[0], out[0]);
@@ -70,6 +85,9 @@ M_INLINE void mat4_copy(mat4 m, mat4 out)
   vec4_copy(m[3], out[3]);
 }
 
+// @DOC: move model matrix by dist
+//       m:    model matrix to be moved
+//       dist: distance to move m by
 M_INLINE void mat4_translate(mat4 m, vec3 dist)
 {
 	vec4 v1, v2, v3;
@@ -83,6 +101,10 @@ M_INLINE void mat4_translate(mat4 m, vec3 dist)
 	vec4_add(v3, m[3], m[3]);
 }
 
+// @DOC: scale model matrix
+//       m:     input matrix
+//       scale: scale to be applied to out
+//       out:   gets set to m scaled by scle
 M_INLINE void mat4_scale(mat4 m, vec3 scale, mat4 out)
 {
 	vec4_mul_f(m[0], scale[0], out[0]);
@@ -92,6 +114,10 @@ M_INLINE void mat4_scale(mat4 m, vec3 scale, mat4 out)
 	vec4_copy(m[3], out[3]);
 }
 
+// @DOC: scale model matrix, using float val
+//       m:     input matrix
+//       scale: scale to be applied to out
+//       out:   gets set to m scaled by scle
 M_INLINE void mat4_scale_f(mat4 m, float scale, mat4 out)
 {
 	vec4_mul_f(m[0], scale, out[0]);
@@ -101,6 +127,9 @@ M_INLINE void mat4_scale_f(mat4 m, float scale, mat4 out)
 	vec4_copy(m[3], out[3]);
 }
 
+// @DOC: multiply two matrices 
+//       a, b: matrices to be multiplied a * b
+//       out:  matrix filed with the result of mul
 M_INLINE void mat4_mul(mat4 a, mat4 b, mat4 out)
 {
   // taken straight from cglm
@@ -132,6 +161,10 @@ M_INLINE void mat4_mul(mat4 a, mat4 b, mat4 out)
   out[3][3] = a03 * b30 + a13 * b31 + a23 * b32 + a33 * b33;
 }
 
+// @DOC: multiply matrix by vec4
+//       m:   matrix
+//       v:   vector4
+//       out: filled with the result
 M_INLINE void mat4_mul_v(mat4 m, vec4 v, vec4 out)
 {
   vec4 tmp;
@@ -142,6 +175,9 @@ M_INLINE void mat4_mul_v(mat4 m, vec4 v, vec4 out)
   vec4_copy(tmp, out);
 }
 
+// @DOC: inverse a mat4 
+//       mat: matrix to be inversed
+//       out: result is stored here
 M_INLINE void mat4_inverse(mat4 mat, mat4 out)
 {
   // taken straight from cglm
@@ -187,6 +223,33 @@ M_INLINE void mat4_inverse(mat4 mat, mat4 out)
   mat4_scale_f(out, det, out);
 }
 
+// @DOC: get front vector from model matrix
+//       taken from: https://stackoverflow.com/questions/53608944/getting-a-forward-vector-from-rotation-and-position 
+//       model: model matrix
+//       out:   gets set to forward dir s
+M_INLINE void mat4_get_forward(mat4 model, vec3 out)
+{
+  mat4 model_inv;
+  mat4_inverse(model, model_inv);
+  model_inv[2][0] *= -1.0f;
+  model_inv[2][1] *= -1.0f;
+  // model_inv[2][1] = 0.0f; // *= -1.0f;
+  vec3_normalize(model_inv[2], out);
+}
+// @DOC: get vectors to all four directions from model matrix
+M_INLINE void mat4_get_directions(mat4 model, vec3 front, vec3 back, vec3 left, vec3 right)
+{
+  mat4_get_forward(model, front);
+ 
+  vec3_cross(front, VEC3_Y(1), right);
+  vec3_mul_f(right, -1.0f, left);
+  vec3_mul_f(front, -1.0f, back);
+}
+
+// @DOC: make model matrix rotated by angle around axis
+//       m:     matrix to be filled
+//       angle: angle in radians
+//       axis:  axis round which to rotate
 M_INLINE void mat4_rotate_make(mat4 m, float angle, vec3 axis)
 {
 	// @NOTE: yoinked straight from cglm, look this up
@@ -209,6 +272,7 @@ M_INLINE void mat4_rotate_make(mat4 m, float angle, vec3 axis)
 	m[3][3] = 1.0f;
 }
 
+// @TODO: @DOC: 
 M_INLINE void mat4_mul_rot(mat4 m1, mat4 m2, mat4 out)
 {
 	// @NOTE: yoinked straight from cglm, look this up
@@ -242,6 +306,10 @@ M_INLINE void mat4_mul_rot(mat4 m1, mat4 m2, mat4 out)
 	out[3][3] = a33;
 }
 
+// @DOC: rotate model matrix deg around axis
+//       m:    matrix to rotate
+//       deg:  degree in radians to rotate
+//       axis: axis around which to rotate
 M_INLINE void mat4_rotate(mat4 m, float deg, vec3 axis)
 {
 	// @NOTE: yoinked straight from cglm, look this up
@@ -250,6 +318,11 @@ M_INLINE void mat4_rotate(mat4 m, float deg, vec3 axis)
 	mat4_mul_rot(m, r, m);
 }
 
+// @DOC: rotate model matrix deg around axis, at point
+//       m:     matrix to rotate
+//       point: point around which to rotate
+//       deg:   degree in radians to rotate
+//       axis:  axis around which to rotate 
 M_INLINE void mat4_rotate_at(mat4 m, vec3 point, float deg, vec3 axis)
 {
 	// @NOTE: yoinked straight from cglm, look this up
@@ -261,6 +334,11 @@ M_INLINE void mat4_rotate_at(mat4 m, vec3 point, float deg, vec3 axis)
 	mat4_translate(m, p_inv);
 }
 
+// @DOC: make a lookat matrix
+//       pos: pos of camera
+//       @TODO:
+//       up:  up direction of camera
+//       out: gets set to lookat matrix 
 M_INLINE void mat4_lookat(vec3 pos, vec3 center, vec3 up, mat4 out) 
 {
 	// @NOTE: yoinked straight from cglm, look this up
@@ -291,6 +369,7 @@ M_INLINE void mat4_lookat(vec3 pos, vec3 center, vec3 up, mat4 out)
 }
 
 // @TODO: remove all calcs not needed in 2d
+// @TODO: @DOC:
 // helper function, making it easier for 2d
 M_INLINE void mat4_lookat_2d(vec2 pos, float zoom, mat4 out)
 {
@@ -302,6 +381,12 @@ M_INLINE void mat4_lookat_2d(vec2 pos, float zoom, mat4 out)
 	mat4_lookat(VEC3_XYZ(pos[0], pos[1], -zoom), center, VEC3_Y(1), out);
 }
 
+// @DOC: make a perspective projection matrix
+//       fovy:     field of view in radians
+//       aspect:   window width / window height
+//       near_val: near clipping plane
+//       far_val:  far clipping plane
+//       out:      mat4 that will be filled 
 M_INLINE void mat4_perspective(float fovy, float aspect, float near_val, float far_val, mat4  out) 
 {
 	// @NOTE: yoinked straight from cglm, look this up
@@ -319,24 +404,37 @@ M_INLINE void mat4_perspective(float fovy, float aspect, float near_val, float f
   	out[3][2] = 2.0f * near_val * far_val * fn;
 }
 
-M_INLINE void mat4_ortho(float left, float right, float bottom,  float top, float nearVal, float farVal, mat4  out) 
+// @DOC: make a orthographic projection matrix
+//       @TODO: 
+//       left: 
+//       right:
+//       bottom:
+//       top:
+//       near_val: near clipping plane
+//       far_val:  far clipping plane
+//       out:      mat4 that will be filled 
+M_INLINE void mat4_ortho(float left, float right, float bottom,  float top, float near_val, float far_val, mat4  out) 
 {
 	// @NOTE: yoinked straight from cglm, look this up
   float rl, tb, fn;
   mat4_make_zero(out);  
   rl = 1.0f / (right  - left);
   tb = 1.0f / (top    - bottom);   
-  fn =-1.0f / (farVal - nearVal);
+  fn =-1.0f / (far_val - near_val);
   out[0][0] = 2.0f * rl;
   out[1][1] = 2.0f * tb;
   out[2][2] = 2.0f * fn;
   out[3][0] =-(right  + left)    * rl;
   out[3][1] =-(top    + bottom)  * tb;
-  out[3][2] = (farVal + nearVal) * fn;
+  out[3][2] = (far_val + near_val) * fn;
   out[3][3] = 1.0f; 
 }
 
-
+// @DOC: make a model matrix
+//       pos:   position
+//       rot:   rotation in degree
+//       scale: scale
+//       model: this mat4 will be filled
 M_INLINE void mat4_make_model(vec3 pos, vec3 rot, vec3 scale, mat4 model)
 {
 	mat4_make_identity(model);
@@ -353,16 +451,22 @@ M_INLINE void mat4_make_model(vec3 pos, vec3 rot, vec3 scale, mat4 model)
 	mat4_scale(model, scale, model);
 }
 
-// helper function, removes calcs not needed or 2d
+// @DOC: make model matrix, helper function, removes calcs not needed or 2d
+//       pos:  position
+//       size: size
+//       rot:  rotation in degree
+//       model: this mat4 will be filled
 M_INLINE void mat4_make_model_2d(vec2 pos, vec2 size, float rot, mat4 model)
 {
 	vec3 pos3  = { pos[0], pos[1], 0.0f };
-	vec3 size3 = { size[0], size[1], 1.0f };
+	vec3 size3 = { size[0], 1.0f, size[1] };
 	// mat4_make_model(model, pos3, rot3, size3);
 	mat4_make_identity(model);
 	m_deg_to_rad(&rot);
+	f32 x = -90.0f; m_deg_to_rad(&x);
 	
-	mat4_rotate_at(model, pos3, rot, VEC3_Z(1));
+	mat4_rotate_at(model, pos3, x,   VEC3_X(1));
+  mat4_rotate_at(model, pos3, rot, VEC3_Z(1));
 	
 	mat4_translate(model, pos3);
 

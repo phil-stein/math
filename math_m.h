@@ -1,5 +1,5 @@
-#ifndef M_MATH_H
-#define M_MATH_H
+#ifndef MATH_M_MATH_H
+#define MATH_M_MATH_H
 
 #include "math_inc.h"
 
@@ -33,19 +33,27 @@
 #define DOUBLE_SQRT(v)  sqrt(v)
 #define F32_ABS(v)      FLOAT_ABS(v)
 #define F64_ABS(v)      DOUBLE_ABS(v)
-#define F32_SQRT        FLOAT_SQRT
-#define F64_SQRT        DOUBLE_SQRT
+#define F32_SQRT(v)     FLOAT_SQRT(v)
+#define F64_SQRT(v)     DOUBLE_SQRT(v)
 
-// convert from degree to radians
+// @DOC: convert from degree to radians
 M_INLINE void m_deg_to_rad(float* deg)
 {
 	*deg = *deg * M_PI_F / 180.0f;
 }
 
-// convert from radians to degree
+// @DOC: convert from radians to degree
 M_INLINE void m_rad_to_deg(float* rad)
 {
 	*rad = *rad * 180.0f / M_PI_F;
 }
+
+// taken from: http://www.corykoseck.com/2018/08/29/programming-in-c-lerp/
+// @DOC: linear interpolation, float between start and end, given percentage
+M_INLINE float m_lerp(float start, float end, float percentage)
+{
+  return CLAMP(start + percentage * (end - start), end, start);
+}
+// @TODO: slerp
 
 #endif

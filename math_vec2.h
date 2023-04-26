@@ -1,5 +1,5 @@
-#ifndef VEC2_MATH_H
-#define VEC2_MATH_H
+#ifndef MATH_VEC2_MATH_H
+#define MATH_VEC2_MATH_H
 
 #include "math_inc.h"
 
@@ -81,7 +81,7 @@ M_INLINE float vec2_dot(vec2 a, vec2 b)
 	return (a[0] * b[0]) + (a[1] * b[1]);
 }
 
-M_INLINE float vec2_magnitude(vec2 a)
+M_INLINE float vec2_magnitude(vec2 a)   // length of vec
 {
 	return sqrtf((a[0] * a[0]) + (a[1] * a[1]));
 }
@@ -135,6 +135,18 @@ M_INLINE void vec2_abs(vec2 a, vec2 out)
 	out[1] = fabsf(a[1]);
 }
 
+// ---- interpolation ----
+
+M_INLINE void vec2_lerp(vec2 start, vec2 end, f32 percentage, vec2 out)
+{
+  out[0] = m_lerp(start[0], end[0], percentage);
+  out[1] = m_lerp(start[1], end[1], percentage);
+}
+M_INLINE void vec2_lerp_f(f32 start, f32 end, f32 percentage, vec2 out)
+{
+  out[0] = m_lerp(start, end, percentage);
+  out[1] = m_lerp(start, end, percentage);
+}
 
 // ---- conditionals ----
 

@@ -1,5 +1,5 @@
-#ifndef VEC_MATH_H
-#define VEC_MATH_H
+#ifndef MATH_VEC4_MATH_H
+#define MATH_VEC4_MATH_H
 
 #include "math_inc.h"
 
@@ -81,7 +81,7 @@ M_INLINE float vec4_dot(vec4 a, vec4 b)
 	return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]) + (a[3] * b[3]);
 }
 
-M_INLINE float vec4_magnitude(vec4 a)
+M_INLINE float vec4_magnitude(vec4 a) // length of vec
 {
 	return sqrtf((a[0] * a[0]) + (a[1] * a[1]) + (a[2] * a[2]) + (a[3] * a[3]));
 }
@@ -131,6 +131,24 @@ M_INLINE void vec4_abs(vec4 a, vec4 out)
 	out[1] = fabsf(a[1]);
 	out[2] = fabsf(a[2]);
 	out[3] = fabsf(a[3]);
+}
+
+
+// ---- interpolation ----
+
+M_INLINE void vec4_lerp(vec4 start, vec4 end, f32 percentage, vec4 out)
+{
+  out[0] = m_lerp(start[0], end[0], percentage);
+  out[1] = m_lerp(start[1], end[1], percentage);
+  out[2] = m_lerp(start[2], end[2], percentage);
+  out[3] = m_lerp(start[3], end[3], percentage);
+}
+M_INLINE void vec4_lerp_f(f32 start, f32 end, f32 percentage, vec4 out)
+{
+  out[0] = m_lerp(start, end, percentage);
+  out[1] = m_lerp(start, end, percentage);
+  out[2] = m_lerp(start, end, percentage);
+  out[3] = m_lerp(start, end, percentage);
 }
 
 

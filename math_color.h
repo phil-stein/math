@@ -1,5 +1,5 @@
-#ifndef COLOR_MATH_H
-#define COLOR_MATH_H
+#ifndef MATH_COLOR_MATH_H
+#define MATH_COLOR_MATH_H
 
 #include "math_inc.h"
 

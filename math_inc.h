@@ -1,5 +1,5 @@
-#ifndef MATH_INC_H
-#define MATH_INC_H
+#ifndef MATH_MATH_INC_H
+#define MATH_MATH_INC_H
 
 // include all math related header files
 
