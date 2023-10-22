@@ -1,6 +1,12 @@
 #ifndef MATH_VEC2_MATH_H
 #define MATH_VEC2_MATH_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+
 #include "math_inc.h"
 
 typedef float	vec2[2]; 	// v[0]: x, v[1]: y
@@ -174,5 +180,9 @@ M_INLINE bool vec2_less_eq(vec2 a, vec2 b)
 {
   return a[0] <= b[0] && a[1] <= b[1];
 }
+
+#ifdef __cplusplus
+} // extern C
+#endif
 
 #endif

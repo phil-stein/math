@@ -1,6 +1,12 @@
 #ifndef MATH_RAND_MATH_H
 #define MATH_RAND_MATH_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+
 #include "math_inc.h"
 #include <stdlib.h>   // rand & srand
 
@@ -44,5 +50,9 @@ M_INLINE uint64_t rand_u64()
   g *= 2;
   return g;
 }
+
+#ifdef __cplusplus
+} // extern C
+#endif
 
 #endif

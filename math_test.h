@@ -2,6 +2,12 @@
 #define MATH_MATH_TEST_H
 
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+
 #include "math_inc.h"
 
 M_INLINE void math_test()
@@ -120,5 +126,9 @@ M_INLINE void math_test()
   vec3 init_copy = VEC3_INIT_COPY(a);
   P_VEC3(init_copy);
 }
+
+#ifdef __cplusplus
+} // extern C
+#endif
 
 #endif // MATH_MATH_TESTS_H

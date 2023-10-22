@@ -1,6 +1,12 @@
 #ifndef MATH_MAT_MATH_H
 #define MATH_MAT_MATH_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+
 #include "math_inc.h"
 
 // @DOC: mat4 row goes down (column-major i think)
@@ -473,6 +479,9 @@ M_INLINE void mat4_make_model_2d(vec2 pos, vec2 size, float rot, mat4 model)
 	mat4_scale(model, size3, model);
 }
 
+#ifdef __cplusplus
+} // extern C
+#endif
 
 #endif
 

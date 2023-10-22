@@ -1,6 +1,12 @@
 #ifndef MATH_M_MATH_H
 #define MATH_M_MATH_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+
 #include "math_inc.h"
 
 #ifndef M_PI
@@ -55,5 +61,9 @@ M_INLINE float m_lerp(float start, float end, float percentage)
   return CLAMP(start + percentage * (end - start), end, start);
 }
 // @TODO: slerp
+
+#ifdef __cplusplus
+} // extern C
+#endif
 
 #endif

@@ -1,6 +1,12 @@
 #ifndef MATH_IVEC2_MATH_H
 #define MATH_IVEC2_MATH_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+
 #include "math_inc.h"
 
 typedef int ivec2[2];   // v[0]: x, v[1]: y
@@ -151,5 +157,8 @@ M_INLINE bool ivec2_less_eq(ivec2 a, ivec2 b)
   return a[0] <= b[0] && a[1] <= b[1];
 }
 
+#ifdef __cplusplus
+} // extern C
+#endif
 
 #endif

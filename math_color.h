@@ -1,6 +1,11 @@
 #ifndef MATH_COLOR_MATH_H
 #define MATH_COLOR_MATH_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include "math_inc.h"
 
 typedef unsigned char c_byte;
@@ -157,6 +162,10 @@ M_INLINE c_hex rgba_to_hex(rgba a)
          a[2] * 0x00000100 + 
          a[3] * 0x00000001;
 }
+
+#ifdef __cplusplus
+} // extern C
+#endif
 
 #endif
 

@@ -1,6 +1,13 @@
 #ifndef MATH_VEC4_MATH_H
 #define MATH_VEC4_MATH_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+
+
 #include "math_inc.h"
 
 typedef float	vec4[4];	// v[0]: x, v[1]: y, v[2]: z, v[3]: w
@@ -184,5 +191,8 @@ M_INLINE bool vec4_less_eq(vec4 a, vec4 b)
          a[2] >= b[2] && a[3] <= b[3];
 }
 
+#ifdef __cplusplus
+} // extern C
+#endif
 
 #endif

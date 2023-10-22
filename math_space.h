@@ -1,6 +1,12 @@
 #ifndef MATH_MATH_SPACE_H
 #define MATH_MATM_SPACE_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+
 // #include "math_inc.h"
 #include "math_mat4.h"
 #include "math_vec4.h"
@@ -90,5 +96,9 @@ M_INLINE void space_screen_to_world(mat4 view, mat4 proj, vec2 pos_normalized, f
 //   
 //   vec3_copy(pos, out);
 // }
+
+#ifdef __cplusplus
+} // extern C
+#endif
 
 #endif

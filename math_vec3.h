@@ -1,6 +1,11 @@
 #ifndef MATH_VEC3_MATH_H
 #define MATH_VEC3_MATH_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include "math_inc.h"
 
 typedef float	vec3[3];	// v[0]: x, v[1]: y, v[2]: z
@@ -14,12 +19,23 @@ typedef int  ivec3[3];  // v[0]: x, v[1]: y, v[2]: z
 #define VEC3_Y_INIT(y)		      { 0, y, 0 }
 #define VEC3_Z_INIT(z)		      { 0, 0, z }
 
+#ifdef __cplusplus
+
+#define VEC3(f)			      new (vec3){ f, f, f }
+#define VEC3_XYZ(x, y, z)	new (vec3){ x, y, z }
+#define VEC3_X(x)		      new (vec3){ x, 0, 0 }
+#define VEC3_Y(y)		      new (vec3){ 0, y, 0 }
+#define VEC3_Z(z)		      new (vec3){ 0, 0, z }
+
+#else 
+
 #define VEC3(f)			      (vec3){ f, f, f }
 #define VEC3_XYZ(x, y, z)	(vec3){ x, y, z }
 #define VEC3_X(x)		      (vec3){ x, 0, 0 }
 #define VEC3_Y(y)		      (vec3){ 0, y, 0 }
 #define VEC3_Z(z)		      (vec3){ 0, 0, z }
 
+#endif
 
 #define P_VEC3(v) 	  printf("|%s| x: %.2f, y: %.2f, z: %.2f\n", #v, v[0], v[1], v[2])
 #define P_IL_VEC3(v) 	printf("|%s| x: %.2f, y: %.2f, z: %.2f", #v, v[0], v[1], v[2])
@@ -337,5 +353,9 @@ M_INLINE bool vec3_less_eq(vec3 a, vec3 b)
 {
   return a[0] <= b[0] && a[1] <= b[1] && a[2] >= b[2];
 }
+
+#ifdef __cplusplus
+} // extern C
+#endif
 
 #endif

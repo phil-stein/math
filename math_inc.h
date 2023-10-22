@@ -1,6 +1,12 @@
 #ifndef MATH_MATH_INC_H
 #define MATH_MATH_INC_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+
 // include all math related header files
 
 // --------------------------------------------------------------------------------------------
@@ -31,6 +37,10 @@
 #include "math_space.h"
 #include "math_color.h"
 #include "math_rand.h"
+
+#ifdef __cplusplus
+} // extern C
+#endif
 
 #endif
 
