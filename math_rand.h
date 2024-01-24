@@ -38,6 +38,10 @@ M_INLINE int rand_int_range(int min, int max)
   return (rand_f32() * (max - min)) + min;
 }
 
+M_INLINE bool rand_bool()
+{
+  return rand_int_range(0, 2) == 1;
+}
 
 
 M_INLINE uint64_t rand_u64()
