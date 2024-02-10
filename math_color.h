@@ -2,8 +2,7 @@
 #define MATH_COLOR_MATH_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 #include "math_inc.h"
