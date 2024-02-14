@@ -1,13 +1,16 @@
 #ifndef MATH_M_MATH_H
 #define MATH_M_MATH_H
 
+#include "math_inc.h"
+#include <float.h>
+#include <math.h>
+
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
 
-#include "math_inc.h"
 
 #ifndef M_PI
 	#define M_PI 	3.14159265358979323846264338327950288
@@ -41,6 +44,15 @@ extern "C"
 #define F64_ABS(v)      DOUBLE_ABS(v)
 #define F32_SQRT(v)     FLOAT_SQRT(v)
 #define F64_SQRT(v)     DOUBLE_SQRT(v)
+
+// floating point equal, cant use ==
+// because floating-point in-precision may cause errror
+#define FLOAT_EQUAL(a, b)   ( fabs( ((float)(a))  - ((float)(b)) )  < ((float)(FLT_EPSILON)  + 0.000001f) )
+#define DOUBLE_EQUAL(a, b)  ( fabs( ((double)(a)) - ((double)(b)) ) < ((double)(DBL_EPSILON) + 0.00000000001) )
+#define F32_EQUAL(a, b)     FLOAT_EQUAL(a, b)
+#define F64_EQUAL(a, b)     DOUBLE_EQUAL(a, b)
+#define F32_EQ(a, b)        FLOAT_EQUAL(a, b)
+#define F64_EQ(a, b)        DOUBLE_EQUAL(a, b)
 
 // @DOC: convert from degree to radians
 M_INLINE void m_deg_to_rad(float* deg)

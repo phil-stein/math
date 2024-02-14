@@ -331,7 +331,8 @@ M_INLINE void vec3_lerp_f(f32 start, f32 end, f32 percentage, vec3 out)
 
 M_INLINE bool vec3_equal(vec3 a, vec3 b)
 {
-  return a[0] == b[0] && a[1] == b[1] && a[2] == b[2];
+  // return a[0] == b[0] && a[1] == b[1] && a[2] == b[2];
+  return F32_EQ(a[0], b[0]) && F32_EQ(a[1], b[1]) && F32_EQ(a[2], b[2]);
 }
 M_INLINE bool vec3_not_equal(vec3 a, vec3 b)
 {
