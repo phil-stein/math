@@ -1,13 +1,10 @@
-#ifndef MATH_M_MATH_H
-#define MATH_M_MATH_H
+#ifndef MATH_MATH_M_H
+#define MATH_MATH_M_H
 
 #include "math_inc.h"
-#include <float.h>
-#include <math.h>
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 
@@ -49,6 +46,8 @@ extern "C"
 // because floating-point in-precision may cause errror
 #define FLOAT_EQUAL(a, b)   ( fabs( ((float)(a))  - ((float)(b)) )  < ((float)(FLT_EPSILON)  + 0.000001f) )
 #define DOUBLE_EQUAL(a, b)  ( fabs( ((double)(a)) - ((double)(b)) ) < ((double)(DBL_EPSILON) + 0.00000000001) )
+#define FLOAT_EQ(a, b)        FLOAT_EQUAL(a, b)
+#define DOUBLE_EQ(a, b)        DOUBLE_EQUAL(a, b)
 #define F32_EQUAL(a, b)     FLOAT_EQUAL(a, b)
 #define F64_EQUAL(a, b)     DOUBLE_EQUAL(a, b)
 #define F32_EQ(a, b)        FLOAT_EQUAL(a, b)

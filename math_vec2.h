@@ -2,15 +2,14 @@
 #define MATH_VEC2_MATH_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 
 #include "math_inc.h"
 
 typedef float	vec2[2]; 	// v[0]: x, v[1]: y
-typedef int ivec2[2];   // v[0]: x, v[1]: y
+typedef int   ivec2[2]; // v[0]: x, v[1]: y
 
 // ---- vec2 creation ----
 
@@ -143,12 +142,12 @@ M_INLINE void vec2_abs(vec2 a, vec2 out)
 
 // ---- interpolation ----
 
-M_INLINE void vec2_lerp(vec2 start, vec2 end, f32 percentage, vec2 out)
+M_INLINE void vec2_lerp(vec2 start, vec2 end, float percentage, vec2 out)
 {
   out[0] = m_lerp(start[0], end[0], percentage);
   out[1] = m_lerp(start[1], end[1], percentage);
 }
-M_INLINE void vec2_lerp_f(f32 start, f32 end, f32 percentage, vec2 out)
+M_INLINE void vec2_lerp_f(float start, float end, float percentage, vec2 out)
 {
   out[0] = m_lerp(start, end, percentage);
   out[1] = m_lerp(start, end, percentage);

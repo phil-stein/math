@@ -1,5 +1,5 @@
-#ifndef MATH_MAT_MATH_H
-#define MATH_MAT_MATH_H
+#ifndef MATH_MAT4_MATH_H
+#define MATH_MAT4_MATH_H
 
 #ifdef __cplusplus
 extern "C"
@@ -469,7 +469,7 @@ M_INLINE void mat4_make_model_2d(vec2 pos, vec2 size, float rot, mat4 model)
 	// mat4_make_model(model, pos3, rot3, size3);
 	mat4_make_identity(model);
 	m_deg_to_rad(&rot);
-	f32 x = -90.0f; m_deg_to_rad(&x);
+	float x = -90.0f; m_deg_to_rad(&x);
 	
 	mat4_rotate_at(model, pos3, x,   VEC3_X(1));
   mat4_rotate_at(model, pos3, rot, VEC3_Z(1));

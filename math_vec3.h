@@ -306,7 +306,7 @@ M_INLINE void vec3_abs(vec3 a, vec3 out)
                                                 m_lerp((start)[1], (end)[1], (percentage)), \
                                                 m_lerp((start)[2], (end)[2], (percentage)) }
 #define VEC3_LERP(start, end, percentage)       (vec3)VEC3_INIT_LERP((start), (end), (percentage))
-M_INLINE void vec3_lerp(vec3 start, vec3 end, f32 percentage, vec3 out)
+M_INLINE void vec3_lerp(vec3 start, vec3 end, float percentage, vec3 out)
 {
   out[0] = m_lerp(start[0], end[0], percentage);
   out[1] = m_lerp(start[1], end[1], percentage);
@@ -319,7 +319,7 @@ M_INLINE void vec3_lerp(vec3 start, vec3 end, f32 percentage, vec3 out)
                                                   m_lerp((start), (end), (percentage)), \
                                                   m_lerp((start), (end), (percentage)) }
 #define VEC3_LERP_F(start, end, percentage)       (vec3)VEC3_INIT_LERP_F((start), (end), (percentage))
-M_INLINE void vec3_lerp_f(f32 start, f32 end, f32 percentage, vec3 out)
+M_INLINE void vec3_lerp_f(float start, float end, float percentage, vec3 out)
 {
   out[0] = m_lerp(start, end, percentage);
   out[1] = m_lerp(start, end, percentage);
@@ -332,7 +332,7 @@ M_INLINE void vec3_lerp_f(f32 start, f32 end, f32 percentage, vec3 out)
 M_INLINE bool vec3_equal(vec3 a, vec3 b)
 {
   // return a[0] == b[0] && a[1] == b[1] && a[2] == b[2];
-  return F32_EQ(a[0], b[0]) && F32_EQ(a[1], b[1]) && F32_EQ(a[2], b[2]);
+  return FLOAT_EQ(a[0], b[0]) && FLOAT_EQ(a[1], b[1]) && FLOAT_EQ(a[2], b[2]);
 }
 M_INLINE bool vec3_not_equal(vec3 a, vec3 b)
 {

@@ -2,8 +2,7 @@
 #define MATH_MATH_INC_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 
@@ -21,13 +20,18 @@ extern "C"
 // forced inline to always inline the functions
 // #define M_INLINE static inline __attribute((always_inline))
 #if defined(_MSC_VER)
-#  define M_INLINE __forceinline
+#define M_INLINE __forceinline
 #else
-#  define M_INLINE static inline __attribute((always_inline))
+#define M_INLINE static inline __attribute((always_inline))
+#endif
+
+#ifndef bool 
+#define bool char
 #endif
 
 #include <math.h>
 #include <inttypes.h>
+#include <float.h>
 #include "math_m.h"
 #include "math_vec2.h"
 #include "math_vec3.h"
@@ -37,6 +41,7 @@ extern "C"
 #include "math_space.h"
 #include "math_color.h"
 #include "math_rand.h"
+
 
 #ifdef __cplusplus
 } // extern C

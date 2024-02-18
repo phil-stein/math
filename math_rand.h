@@ -1,18 +1,14 @@
 #ifndef MATH_RAND_MATH_H
 #define MATH_RAND_MATH_H
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
 
 #include "math_inc.h"
 #include <stdlib.h>   // rand & srand
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-// #define P_U64(u)   printf("|%s| %llu\n", #u, u)
-#define P_U64(u)   printf("|%s| %"PRId64"\n", #u, u)
 
 // @DOC: seed rand, call before other calls to rand
 M_INLINE void rand_seed(int seed)
@@ -28,10 +24,11 @@ M_INLINE int rand_int()
 {
   return rand();
 }
-M_INLINE f32 rand_f32()
+M_INLINE float rand_f32()
 {
-  return (f32)rand() / (f32)RAND_MAX;
+  return (float)rand() / (float)RAND_MAX;
 }
+#define rand_float()  rand_f32()
 
 M_INLINE int rand_int_range(int min, int max)
 {

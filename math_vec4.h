@@ -143,14 +143,14 @@ M_INLINE void vec4_abs(vec4 a, vec4 out)
 
 // ---- interpolation ----
 
-M_INLINE void vec4_lerp(vec4 start, vec4 end, f32 percentage, vec4 out)
+M_INLINE void vec4_lerp(vec4 start, vec4 end, float percentage, vec4 out)
 {
   out[0] = m_lerp(start[0], end[0], percentage);
   out[1] = m_lerp(start[1], end[1], percentage);
   out[2] = m_lerp(start[2], end[2], percentage);
   out[3] = m_lerp(start[3], end[3], percentage);
 }
-M_INLINE void vec4_lerp_f(f32 start, f32 end, f32 percentage, vec4 out)
+M_INLINE void vec4_lerp_f(float start, float end, float percentage, vec4 out)
 {
   out[0] = m_lerp(start, end, percentage);
   out[1] = m_lerp(start, end, percentage);
