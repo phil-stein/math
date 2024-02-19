@@ -25,9 +25,9 @@ extern "C" {
 #define M_INLINE static inline __attribute((always_inline))
 #endif
 
-#ifndef bool 
-#define bool char
-#endif
+// #ifndef bool 
+// #define bool char
+// #endif
 
 #include <math.h>
 #include <inttypes.h>
