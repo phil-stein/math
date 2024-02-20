@@ -69,6 +69,7 @@ M_INLINE void mat4_set_pos(float x, float y, float z, mat4 out)
   out[3][1] = y;
   out[3][2] = z;
 }
+#define mat4_set_pos_vec3(pos, out) mat4_set_pos((pos)[0], (pos)[1], (pos)[2], out)
 
 // @DOC: get postion value out of a model matrix
 //       m:   model matrix to extract pos from
@@ -342,7 +343,7 @@ M_INLINE void mat4_rotate_at(mat4 m, vec3 point, float deg, vec3 axis)
 
 // @DOC: make a lookat matrix
 //       pos: pos of camera
-//       @TODO:
+//       center: i think is target
 //       up:  up direction of camera
 //       out: gets set to lookat matrix 
 M_INLINE void mat4_lookat(vec3 pos, vec3 center, vec3 up, mat4 out) 

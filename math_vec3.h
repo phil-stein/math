@@ -37,11 +37,29 @@ typedef int  ivec3[3];  // v[0]: x, v[1]: y, v[2]: z
 
 #endif
 
-#define P_VEC3(v) 	  printf("|%s| x: %.2f, y: %.2f, z: %.2f\n", #v, v[0], v[1], v[2])
+#ifndef MATH_PRINT_NO_COLOR // print without using terminal colors
+// prints PF_NORMAL, PF_CYAN, then PF_NORMAL PF_WHITE
+#define P_VEC3(v) 	  _PF("\033[%d;%dm", 0, 36); printf("|%s|", #v); _PF("\033[%d;%dm", 0, 37); \
+                      printf(" x: %.2f, y: %.2f, z: %.2f\n", v[0], v[1], v[2])
+// prints PF_NORMAL, PF_CYAN, then PF_NORMAL PF_WHITE
+#define P_IL_VEC3(v) 	_PF("\033[%d;%dm", 0, 36); printf("|%s|", #v); _PF("\033[%d;%dm", 0, 37); \
+                      printf(" x: %.2f, y: %.2f, z: %.2f", v[0], v[1], v[2])
+
+#define VEC3_NAN(v)      (isnan(v[0]) != 0 || isnan(v[1]) != 0 || isnan(v[2]) != 0) 
+// prints PF_NORMAL, PF_CYAN, then PF_NORMAL PF_WHITE
+#define P_VEC3_NAN(v)                                                           \
+  { if (VEC3_NAN(v))                                                            \
+    { _PF("\033[%d;%dm", 0, 36); printf("|%s|", #v); _PF("\033[%d;%dm", 0, 37); \
+      printf(" x: %.2f, y: %.2f, z: %.2f\n", v[0], v[1], v[2]); }               \
+  }
+
+#else // MATH_PRINT_NO_COLOR
+//#define P_VEC3(v) 	printf("|%s| x: %.2f, y: %.2f, z: %.2f\n", #v, v[0], v[1], v[2])
 #define P_IL_VEC3(v) 	printf("|%s| x: %.2f, y: %.2f, z: %.2f", #v, v[0], v[1], v[2])
 
 #define VEC3_NAN(v)      (isnan(v[0]) != 0 || isnan(v[1]) != 0 || isnan(v[2]) != 0) 
 #define P_VEC3_NAN(v)    { if (VEC3_NAN(v)) { printf("|%s| x: %.2f, y: %.2f, z: %.2f\n", #v, v[0], v[1], v[2]); } }
+#endif // MATH_PRINT_NO_COLOR
 
 // ---- vec3 ----
 
@@ -200,6 +218,46 @@ M_INLINE float vec3_distance(vec3 a, vec3 b)
 	vec3 d;
 	vec3_sub(a, b, d);
 	return vec3_magnitude(d); 
+}
+
+// @TODO: @BUGG: idk why i have to include here otherwise errors 
+#include "math_vec4.h"
+#include "math_mat4.h"
+
+M_INLINE void vec3_rotate_towards(vec3 current, vec3 target, float max_angle_deg, vec3 out)
+{
+  // taken from: https://gamedev.stackexchange.com/questions/203035/implementation-of-vector3-rotatetowards-from-unity
+  // Vector3 fromDirection = fromVector.normalized; // current_dir = norm(current)
+  // Vector3 toDirection = toVector.normalized;     // target_dir  = norm(target) 
+  // float angleRadians = Mathf.Acos(Vector3.Dot(fromDirection, toDirection));
+  // float angleDegrees = Mathf.Min(angleRadians * Mathf.Rad2Deg, maxAngleDegrees);
+  // Vector3 axis = Vector3.Cross(fromDirection, toDirection);
+  // Quaternion rotationIncrement = Quaternion.AngleAxis(angleDegrees, axis);
+  // outputVector = rotationIncrement * fromVector;
+
+  printf("i dont think this works: %s\n", __func__);
+  abort();
+
+  vec3 current_dir, target_dir;
+  vec3_normalize(current, current_dir);
+  vec3_normalize(target, target_dir);
+  
+  f32 angle_rad = acos(vec3_dot(current, current_dir));
+  f32 angle_deg = angle_rad; 
+  m_rad_to_deg(&angle_deg);
+  angle_deg = MIN(angle_deg, max_angle_deg);
+  angle_rad = angle_deg;
+  m_deg_to_rad(&angle_rad);
+
+  vec3 axis;
+  vec3_cross(current, current_dir, axis);
+  mat4 rot_mat;
+  mat4_rotate_make(rot_mat, angle_rad, axis);
+  vec4 result, current_v4;
+  vec3_copy(current, current_v4);
+  current_v4[3] = 0.0f; // @UNSURE:
+  mat4_mul_v(rot_mat, current_v4, result);
+  vec3_copy(result, out);
 }
 
 // @DOC: same as func but can be passed as arg,

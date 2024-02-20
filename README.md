@@ -1,6 +1,7 @@
 
 # math library
 
+define MATH_PRINT_NO_COLOR gloablly to disable P_VEC3(), etc. to print using colors -> `-DMATH_PRINT_NO_COLOR`<br>
 
 simple math library for games. <br>
 heavily inspired by and partially a direct copy of [cglm](https://github.com/recp/cglm) <br>
