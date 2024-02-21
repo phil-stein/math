@@ -246,17 +246,20 @@ M_INLINE void mat4_get_forward(mat4 model, vec3 out)
   mat4_inverse(model, model_inv);
   model_inv[2][0] *= -1.0f;
   model_inv[2][1] *= -1.0f;
-  // model_inv[2][1] = 0.0f; // *= -1.0f;
+  // model_inv[2][2] *= -1.0f;
   vec3_normalize(model_inv[2], out);
 }
 // @DOC: get vectors to all four directions from model matrix
 M_INLINE void mat4_get_directions(mat4 model, vec3 front, vec3 back, vec3 left, vec3 right)
 {
   mat4_get_forward(model, front);
- 
   vec3_cross(front, VEC3_Y(1), right);
   vec3_mul_f(right, -1.0f, left);
   vec3_mul_f(front, -1.0f, back);
+  // mat4_get_left(model, left);
+  // vec3_cross(left, VEC3_Y(1), front);
+  // vec3_mul_f(left, -1.0f, right);
+  // vec3_mul_f(front, -1.0f, back);
 }
 
 // @DOC: make model matrix rotated by angle around axis
