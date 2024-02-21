@@ -69,7 +69,13 @@ M_INLINE void mat4_set_pos(float x, float y, float z, mat4 out)
   out[3][1] = y;
   out[3][2] = z;
 }
-#define mat4_set_pos_vec3(pos, out) mat4_set_pos((pos)[0], (pos)[1], (pos)[2], out)
+// #define mat4_set_pos_vec3(pos, out) mat4_set_pos((pos)[0], (pos)[1], (pos)[2], out)
+M_INLINE void mat4_set_pos_vec3(vec3 pos, mat4 out) 
+{
+  out[3][0] = pos[0];
+  out[3][1] = pos[1];
+  out[3][2] = pos[2];
+}
 
 // @DOC: get postion value out of a model matrix
 //       m:   model matrix to extract pos from
