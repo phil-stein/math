@@ -53,6 +53,12 @@ extern "C" {
 #define F32_EQ(a, b)        FLOAT_EQUAL(a, b)
 #define F64_EQ(a, b)        DOUBLE_EQUAL(a, b)
 
+// taken from nuklear.h NK_BETWEEN() & NK_INBOX()
+#define POINT_BETWEEN(x, a, b) ((a) <= (x) && (x) < (b))
+// taken from nuklear.h NK_BETWEEN() & NK_INBOX()
+// @DOC: check if point is in rect
+#define POINT_IN_RECT(px, py, x, y, w, h) (POINT_BETWEEN(px,x,x+w) && POINT_BETWEEN(py,y,y+h))
+
 // @DOC: convert from degree to radians
 M_INLINE void m_deg_to_rad(float* deg)
 {
