@@ -57,6 +57,10 @@ extern "C" {
 #define POINT_BETWEEN(x, a, b) ((a) <= (x) && (x) < (b))
 // taken from nuklear.h NK_BETWEEN() & NK_INBOX()
 // @DOC: check if point is in rect
+//        ____w___
+//       |       |h
+//       |   pxy |
+//       x,y------
 #define POINT_IN_RECT(px, py, x, y, w, h) (POINT_BETWEEN(px,x,x+w) && POINT_BETWEEN(py,y,y+h))
 
 // @DOC: convert from degree to radians
