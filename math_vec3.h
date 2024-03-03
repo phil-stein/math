@@ -63,6 +63,11 @@ typedef int  ivec3[3];  // v[0]: x, v[1]: y, v[2]: z
 
 // ---- vec3 ----
 
+
+// @DOC: returns x+y+z
+M_INLINE float vec3_sum(vec3 v)
+{ return v[0] + v[1] + v[2]; }
+
 // @DOC: same as func but can be passed as arg, or initialzier
 //       vec3_copy(VEC3_ADD(a, b), c);
 #define VEC3_INIT_ADD(a, b)  { (a)[0]+(b)[0], (a)[1]+(b)[1], (a)[2]+(b)[2] }

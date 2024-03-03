@@ -76,7 +76,6 @@ M_INLINE void mat4_set_pos_vec3(vec3 pos, mat4 out)
   out[3][1] = pos[1];
   out[3][2] = pos[2];
 }
-
 // @DOC: get postion value out of a model matrix
 //       m:   model matrix to extract pos from
 //       out: will be set to position value
@@ -85,6 +84,35 @@ M_INLINE void mat4_get_pos(mat4 m, vec3 out)
   out[0] = m[3][0];
   out[1] = m[3][1];
   out[2] = m[3][2];
+}
+
+M_INLINE void mat4_set_scale_vec3(vec3 scl, mat4 out) 
+{
+  // taken from: https://erkaman.github.io/posts/model_matrix_recover.html
+  vec3_normalize(out[0], out[0]);
+  vec3_mul_f(out[0], scl[0], out[0]);
+  
+  vec3_normalize(out[1], out[1]);
+  vec3_mul_f(out[1], scl[1], out[1]);
+
+  vec3_normalize(out[1], out[1]);
+  vec3_mul_f(out[1], scl[1], out[1]);
+}
+M_INLINE void mat4_set_scale(float x, float y, float z, mat4 out)
+{ mat4_set_scale_vec3(VEC3_XYZ(x, y, z), out); }
+
+M_INLINE void mat4_get_scale_vec3(mat4 mat, vec3 out) 
+{
+  // taken from: https://erkaman.github.io/posts/model_matrix_recover.html
+  out[0] = vec3_magnitude(mat[0]);
+  out[1] = vec3_magnitude(mat[1]);
+  out[2] = vec3_magnitude(mat[2]);
+}
+M_INLINE void mat4_get_scale(mat4 mat, float* x, float* y, float* z)
+{
+  vec3 out = { 0.0f }; 
+  mat4_get_scale_vec3(mat, out);
+  *x = out[0]; *y = out[1]; *z = out[2];
 }
 
 // @DOC: copy one matrix into another
@@ -320,6 +348,23 @@ M_INLINE void mat4_mul_rot(mat4 m1, mat4 m2, mat4 out)
 	out[3][1] = a31;
 	out[3][2] = a32;
 	out[3][3] = a33;
+}
+
+INLINE void mat4_get_rot_mat(mat4 m, mat4 out)
+{
+  mat4_make_identity(out);
+  vec3_normalize(m[0], out[0]);
+  vec3_normalize(m[1], out[1]);
+  vec3_normalize(m[2], out[2]);
+}
+
+M_INLINE void mat4_get_rot(mat4 m, vec3 out)
+{
+  mat4 rot_mat;
+  mat4_get_rot_mat(m, rot_mat);
+  out[0] = vec3_sum(rot_mat[0]);
+  out[1] = vec3_sum(rot_mat[1]);
+  out[2] = vec3_sum(rot_mat[2]);
 }
 
 // @DOC: rotate model matrix deg around axis
