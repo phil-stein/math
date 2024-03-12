@@ -81,7 +81,7 @@ M_INLINE void m_rad_to_deg(float* rad)
 M_INLINE float m_lerp(float start, float end, float percentage)
 {
   // return CLAMP(start + percentage * (end - start), start, end);
-  percentage = CLAMP(percentage, 0.0f, 1.0f);
+  // percentage = CLAMP(percentage, 0.0f, 1.0f);
   return (start + percentage * (end - start));
 }
 M_INLINE float m_ease_in_quadratic(float start, float end, float percentage)
