@@ -29,6 +29,7 @@ extern "C" {
 // if less than min, min, if more than max, else a
 #ifndef CLAMP
 	#define CLAMP(a, _min, _max)	MAX(_min, MIN(_max, a))
+	// #define CLAMP(a, _min, _max)	MIN(_min, MAX(_max, a))
 #endif
 
 #define INT_ABS(v)      abs(v)
@@ -79,9 +80,30 @@ M_INLINE void m_rad_to_deg(float* rad)
 // @DOC: linear interpolation, float between start and end, given percentage
 M_INLINE float m_lerp(float start, float end, float percentage)
 {
-  return CLAMP(start + percentage * (end - start), end, start);
+  // return CLAMP(start + percentage * (end - start), start, end);
+  percentage = CLAMP(percentage, 0.0f, 1.0f);
+  return (start + percentage * (end - start));
 }
-// @TODO: slerp
+M_INLINE float m_ease_in_quadratic(float start, float end, float percentage)
+{
+  return m_lerp(start, end, (percentage * percentage)); 
+}
+M_INLINE float m_ease_in_cubic(float start, float end, float percentage)
+{
+  return m_lerp(start, end, (percentage * percentage * percentage)); 
+}
+// M_INLINE float m_ease_out(float start, float end, float percentage)
+// {
+//   return m_lerp(start, end, (percentage + (1.2f-percentage))); 
+// }
+// M_INLINE float m_ease_out_quadratic(float start, float end, float percentage)
+// {
+//   return m_lerp(start, end, (percentage + ((1.2f-percentage) *2) )); 
+// }
+// M_INLINE float m_ease_out_cubic(float start, float end, float percentage)
+// {
+//   return m_lerp(start, end, (percentage + ((1.2f-percentage) *3) )); 
+// }
 
 #ifdef __cplusplus
 } // extern C
