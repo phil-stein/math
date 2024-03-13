@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-#include "math_inc.h"
+#include "math_m.h"
 
 typedef unsigned char c_byte;
 typedef c_byte        rgb[3];     // 0 - 255 
@@ -85,7 +85,7 @@ M_INLINE void rgba_to_rgb(rgba a, rgb out)
   out[1] = a[1];
   out[2] = a[2];
 }
-M_INLINE void rgb_to_rgba(rgba a, c_byte alpha, rgb out)
+M_INLINE void rgb_to_rgba(rgb a, c_byte alpha, rgba out)
 {
   out[0] = a[0];
   out[1] = a[1];
@@ -111,55 +111,55 @@ M_INLINE void rgbf_to_rgbaf(rgbaf a, float alpha, rgbf out)
 
 M_INLINE void rgb_to_rgbf(rgb a, rgbf out)
 {
-  out[0] = a[0] / 256;
-  out[1] = a[1] / 256;
-  out[2] = a[2] / 256;
+  out[0] = (float)a[0] / 256.0f;
+  out[1] = (float)a[1] / 256.0f;
+  out[2] = (float)a[2] / 256.0f;
 }
 M_INLINE void rgba_to_rgbaf(rgba a, rgbaf out)
 {
-  out[0] = a[0] / 256;
-  out[1] = a[1] / 256;
-  out[2] = a[2] / 256;
-  out[3] = a[3] / 256;
+  out[0] = (float)a[0] / 256.0f;
+  out[1] = (float)a[1] / 256.0f;
+  out[2] = (float)a[2] / 256.0f;
+  out[3] = (float)a[3] / 256.0f;
 }
 M_INLINE void rgbf_to_rgb(rgbf a, rgb out)
 {
-  out[0] = a[0] * 256;
-  out[1] = a[1] * 256;
-  out[2] = a[2] * 256;
+  out[0] = (c_byte)( a[0] * 256.0f );
+  out[1] = (c_byte)( a[1] * 256.0f );
+  out[2] = (c_byte)( a[2] * 256.0f );
 }
 M_INLINE void rgbaf_to_rgba(rgbaf a, rgba out)
 {
-  out[0] = a[0] * 256;
-  out[1] = a[1] * 256;
-  out[2] = a[2] * 256;
-  out[3] = a[3] * 256;
+  out[0] = (c_byte)( a[0] * 256.0f );
+  out[1] = (c_byte)( a[1] * 256.0f );
+  out[2] = (c_byte)( a[2] * 256.0f );
+  out[3] = (c_byte)( a[3] * 256.0f );
 }
 M_INLINE void hex_to_rgb(c_hex a, rgb out)
 {
-  out[2] = ((a >> 8)  & 0xFF); // extract second byte
-  out[1] = ((a >> 16) & 0xFF); // extract third byte
-  out[0] = ((a >> 24) & 0xFF); // extract fourth byte
+  out[2] = (c_byte)((a >> 8)  & 0xFF); // extract second byte
+  out[1] = (c_byte)((a >> 16) & 0xFF); // extract third byte
+  out[0] = (c_byte)((a >> 24) & 0xFF); // extract fourth byte
 }
 M_INLINE void hex_to_rgba(c_hex a, rgba out)
 {
-  out[3] = ( a  & 0xFF);       // extract first byte
-  out[2] = ((a >> 8)  & 0xFF); // extract second byte
-  out[1] = ((a >> 16) & 0xFF); // extract third byte
-  out[0] = ((a >> 24) & 0xFF); // extract fourth byte
+  out[3] = (c_byte)( a  & 0xFF);       // extract first byte
+  out[2] = (c_byte)((a >> 8)  & 0xFF); // extract second byte
+  out[1] = (c_byte)((a >> 16) & 0xFF); // extract third byte
+  out[0] = (c_byte)((a >> 24) & 0xFF); // extract fourth byte
 }
 M_INLINE c_hex rgb_to_hex(rgb a)
 {
-  return a[0] * 0x01000000 + 
-         a[1] * 0x00010000 + 
-         a[2] * 0x00000100;
+  return (c_hex)( a[0] * 0x01000000 + 
+                  a[1] * 0x00010000 + 
+                  a[2] * 0x00000100 );
 }
 M_INLINE c_hex rgba_to_hex(rgba a)
 {
-  return a[0] * 0x01000000 + 
-         a[1] * 0x00010000 + 
-         a[2] * 0x00000100 + 
-         a[3] * 0x00000001;
+  return (c_hex)( a[0] * 0x01000000 + 
+                  a[1] * 0x00010000 + 
+                  a[2] * 0x00000100 + 
+                  a[3] * 0x00000001 );
 }
 
 #ifdef __cplusplus

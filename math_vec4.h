@@ -163,8 +163,10 @@ M_INLINE void vec4_lerp_f(float start, float end, float percentage, vec4 out)
 
 M_INLINE bool vec4_equal(vec4 a, vec4 b)
 {
-  return a[0] == b[0] && a[1] == b[1] && 
-         a[2] == b[2] && a[3] == b[3];
+  // return a[0] == b[0] && a[1] == b[1] && 
+  //        a[2] == b[2] && a[3] == b[3];
+  return FLOAT_EQ(a[0], b[0]) && FLOAT_EQ(a[1], b[1]) && 
+         FLOAT_EQ(a[2], b[2]) && FLOAT_EQ(a[3], b[3]);
 }
 M_INLINE bool vec4_not_equal(vec4 a, vec4 b)
 {

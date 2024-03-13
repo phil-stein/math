@@ -2,7 +2,7 @@
 #define MATH_RAND_MATH_H
 
 
-#include "math_inc.h"
+#include "math_m.h"
 #include <stdlib.h>   // rand & srand
 
 #ifdef __cplusplus
@@ -11,7 +11,7 @@ extern "C" {
 
 
 // @DOC: seed rand, call before other calls to rand
-M_INLINE void rand_seed(int seed)
+M_INLINE void rand_seed(unsigned int seed)
 {
 	srand(seed);
 }
@@ -32,7 +32,7 @@ M_INLINE float rand_f32()
 
 M_INLINE int rand_int_range(int min, int max)
 {
-  return (rand_f32() * (max - min)) + min;
+  return (int)(rand_f32() * (float)(max - min)) + min;
 }
 
 M_INLINE bool rand_bool()
@@ -44,10 +44,10 @@ M_INLINE bool rand_bool()
 M_INLINE uint64_t rand_u64()
 {
   uint64_t g = 0;
-  g += rand_int();
-  g *= rand_int();
-  g *= rand_int();
-  g *= rand_int();
+  g += (uint64_t)rand_int();
+  g *= (uint64_t)rand_int();
+  g *= (uint64_t)rand_int();
+  g *= (uint64_t)rand_int();
   g *= 2;
   return g;
 }

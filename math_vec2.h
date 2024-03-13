@@ -6,7 +6,7 @@ extern "C" {
 #endif
 
 
-#include "math_inc.h"
+#include "math_m.h"
 
 typedef float	vec2[2]; 	// v[0]: x, v[1]: y
 typedef int   ivec2[2]; // v[0]: x, v[1]: y
@@ -157,7 +157,8 @@ M_INLINE void vec2_lerp_f(float start, float end, float percentage, vec2 out)
 
 M_INLINE bool vec2_equal(vec2 a, vec2 b)
 {
-  return a[0] == b[0] && a[1] == b[1];
+  // return a[0] == b[0] && a[1] == b[1];
+  return FLOAT_EQ(a[0], b[0]) && FLOAT_EQ(a[1], b[1]);
 }
 M_INLINE bool vec2_not_equal(vec2 a, vec2 b)
 {

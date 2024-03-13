@@ -1,36 +1,48 @@
 #ifndef MATH_MATH_M_H
 #define MATH_MATH_M_H
 
-#include "math_inc.h"
+#include <stdio.h>
+#include <stdbool.h>
+// #include "math_inc.h"
+#include <math.h>
+#include <inttypes.h>
+#include <float.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+// static to avoid duplication when including header in multiple files 
+// forced inline to always inline the functions
+// #define M_INLINE static inline __attribute((always_inline))
+#if defined(_MSC_VER)
+#define M_INLINE __forceinline
+#else
+#define M_INLINE static inline __attribute((always_inline))
+#endif
+
 
 
 #ifndef M_PI
-	#define M_PI 	3.14159265358979323846264338327950288
+  #define M_PI 	3.14159265358979323846264338327950288
 #endif
 #ifndef M_PI_F
-	#define M_PI_F	(float)M_PI
+  #define M_PI_F	(float)M_PI
 #endif
 
 // if less than b than b else a
-#ifndef MIN
-	#define MIN(a, b)	((a) < (b) ? (a) : (b))
-#endif
+#define MIN(a, b)	    ((a) < (b) ? (a) : (b))
+#define MIN3(a, b, c) MIN(a, MIN(b, c))
+// #define MIN3(a, b, c)	((a) < (b) ? (a) < (c) ? (a) : (c) : (b))
 
 // if more than b than b else a
-#ifndef MAX
-	#define MAX(a, b)	((a) > (b) ? (a) : (b))
-#endif
+#define MAX(a, b)	    ((a) > (b) ? (a) : (b))
+// #define MAX3(a, b, c)	((a) > (b) ? (a) > (c) ? (a) : (c) : (b))
+#define MAX3(a, b, c) MAX(a, MAX(b, c))
 
 // if less than min, min, if more than max, else a
-#ifndef CLAMP
-	#define CLAMP(a, _min, _max)	MAX(_min, MIN(_max, a))
-	// #define CLAMP(a, _min, _max)	MIN(_min, MAX(_max, a))
-#endif
+#define CLAMP(a, _min, _max)	MAX(_min, MIN(_max, a))
+// #define CLAMP(a, _min, _max)	MIN(_min, MAX(_max, a))
 
 #define INT_ABS(v)      abs(v)
 #define FLOAT_ABS(v)    fabsf(v)
@@ -45,10 +57,10 @@ extern "C" {
 
 // floating point equal, cant use ==
 // because floating-point in-precision may cause errror
-#define FLOAT_EQUAL(a, b)   ( fabs( ((float)(a))  - ((float)(b)) )  < ((float)(FLT_EPSILON)  + 0.000001f) )
+#define FLOAT_EQUAL(a, b)   ( fabsf( ((float)(a))  - ((float)(b)) )  < ((float)(FLT_EPSILON)  + 0.000001f) )
 #define DOUBLE_EQUAL(a, b)  ( fabs( ((double)(a)) - ((double)(b)) ) < ((double)(DBL_EPSILON) + 0.00000000001) )
-#define FLOAT_EQ(a, b)        FLOAT_EQUAL(a, b)
-#define DOUBLE_EQ(a, b)        DOUBLE_EQUAL(a, b)
+#define FLOAT_EQ(a, b)      FLOAT_EQUAL(a, b)
+#define DOUBLE_EQ(a, b)     DOUBLE_EQUAL(a, b)
 #define F32_EQUAL(a, b)     FLOAT_EQUAL(a, b)
 #define F64_EQUAL(a, b)     DOUBLE_EQUAL(a, b)
 #define F32_EQ(a, b)        FLOAT_EQUAL(a, b)

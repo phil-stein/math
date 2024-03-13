@@ -16,22 +16,6 @@ extern "C" {
 // --------------------------------------------------------------------------------------------
 
 
-// static to avoid duplication when including header in multiple files 
-// forced inline to always inline the functions
-// #define M_INLINE static inline __attribute((always_inline))
-#if defined(_MSC_VER)
-#define M_INLINE __forceinline
-#else
-#define M_INLINE static inline __attribute((always_inline))
-#endif
-
-// #ifndef bool 
-// #define bool char
-// #endif
-
-#include <math.h>
-#include <inttypes.h>
-#include <float.h>
 #include "math_m.h"
 #include "math_vec2.h"
 #include "math_vec3.h"

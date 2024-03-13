@@ -7,7 +7,7 @@ extern "C"
 #endif
 
 
-#include "math_inc.h"
+#include "math_m.h"
 
 typedef int ivec2[2];   // v[0]: x, v[1]: y
 
@@ -83,7 +83,7 @@ M_INLINE int ivec2_dot(ivec2 a, ivec2 b)
 
 M_INLINE float ivec2_magnitude(ivec2 a) // length of vec
 {
-	return sqrtf((a[0] * a[0]) + (a[1] * a[1]));
+	return sqrtf((float)( (a[0] * a[0]) + (a[1] * a[1]) ) );
 }
 
 M_INLINE void ivec2_copy(ivec2 a, ivec2 out)

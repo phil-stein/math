@@ -213,7 +213,8 @@ M_INLINE void vec3_negate(vec3 a, vec3 out)
 M_INLINE void vec3_normalize(vec3 a, vec3 out)
 {
 	vec3_copy(a, out);
-  if (a[0] == 0.0f && a[1] == 0.0f && a[2] == 0.0f) { return; } // otherwise next steps would be 0 / 0
+  // if (a[0] == 0.0f && a[1] == 0.0f && a[2] == 0.0f) { return; } // otherwise next steps would be 0 / 0
+  if (FLOAT_EQ(a[0], 0.0f) && FLOAT_EQ(a[1], 0.0f) && FLOAT_EQ(a[2], 0.0f) ) { return; } // otherwise next steps would be 0 / 0
 	float mag = vec3_magnitude(out);
 	vec3_div_f(out, mag, out);
 }
@@ -247,7 +248,7 @@ M_INLINE void vec3_rotate_towards(vec3 current, vec3 target, float max_angle_deg
   vec3_normalize(current, current_dir);
   vec3_normalize(target, target_dir);
   
-  f32 angle_rad = acos(vec3_dot(current, current_dir));
+  f32 angle_rad = acosf(vec3_dot(current, current_dir));
   f32 angle_deg = angle_rad; 
   m_rad_to_deg(&angle_deg);
   angle_deg = MIN(angle_deg, max_angle_deg);

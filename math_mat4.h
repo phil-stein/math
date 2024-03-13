@@ -374,19 +374,19 @@ M_INLINE void mat4_get_rot_rad(mat4 m, vec3 out)
   else if (sp >= 1.0f) 
   { p =  1.570796f; } // -pi/2
   else
-  { p = asin(sp); } 
+  { p = (float)asin(sp); } 
  
   // check for gimbal-lock case, giving slight tolerance for imprecision
   if (fabs(sp) > 0.9999f)
   {
     // looking straight up/down, set bank to 0 and just use heading
     b = 0.0f;
-    h = atan2(-rot_mat[0][2], rot_mat[0][0]);
+    h = (float)atan2f(-rot_mat[0][2], rot_mat[0][0]);
   }
   else
   {
-    h = atan2(rot_mat[2][0], rot_mat[2][2]);
-    b = atan2(rot_mat[0][1], rot_mat[1][1]);
+    h = atan2f(rot_mat[2][0], rot_mat[2][2]);
+    b = atan2f(rot_mat[0][1], rot_mat[1][1]);
   }
 
   // need to switch cause pitch is x and heading is y

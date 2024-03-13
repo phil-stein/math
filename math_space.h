@@ -7,10 +7,7 @@ extern "C"
 #endif
 
 
-// #include "math_inc.h"
-#include "math_mat4.h"
-#include "math_vec4.h"
-#include "math_vec3.h"
+#include "math_inc.h"
 
 // @DOC: project screen coordinates into world space
 //       view:           view matrix
