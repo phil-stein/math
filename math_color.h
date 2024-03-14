@@ -29,6 +29,8 @@ typedef int           c_hex;      // 0xFF0000 rrggbb, 0xFF0000FF rrggbbaa
 #define B_F(b)              (rgbf) {0, 0, b}
 #define RGB_F(r, g, b)      (rgbf) {r, g, b}
 #define RGB_F_RGB(c)        (rgbf) {c, c, c}
+#define RGBF(r, g, b)       RGB_F(r, g, b)
+#define RGBF_RGB(c)         RGB_F_RGB(c)  
 #define R_AF(r)             (rgbaf){r, 0, 0, 1}
 #define G_AF(g)             (rgbaf){0, g, 0, 1}
 #define B_AF(b)             (rgbaf){0, 0, b,1 }
