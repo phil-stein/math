@@ -76,6 +76,9 @@ extern "C" {
 //       x,y------
 #define POINT_IN_RECT(px, py, x, y, w, h) (POINT_BETWEEN(px,x,x+w) && POINT_BETWEEN(py,y,y+h))
 
+#define DEG_TO_RAD(_deg)	((_deg) * M_PI_F / 180.0f)
+#define RAD_TO_DEG(_rad)	((_rad) * 180.0f / M_PI_F)
+
 // @DOC: convert from degree to radians
 M_INLINE void m_deg_to_rad(float* deg)
 {
