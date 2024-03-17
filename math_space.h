@@ -1,6 +1,8 @@
-#ifndef MATH_MATH_SPACE_H
+#ifndef MATH_MATH_SPACE_Hspace
 #define MATH_MATM_SPACE_H
 
+#include "global/global_print.h"
+#include "math/math_mat4.h"
 #ifdef __cplusplus
 extern "C"
 {
@@ -57,6 +59,22 @@ M_INLINE void space_screen_to_world(mat4 view, mat4 proj, vec2 pos_normalized, f
   // pos[1] /= pos[3];
   // pos[2] /= pos[3];
   vec3_copy(pos, out);
+}
+M_INLINE void space_world_to_screen(vec3 pos, mat4 view, mat4 proj, vec2 out)
+{
+  // taken from: https://gamedev.stackexchange.com/questions/35263/converting-world-space-coordinate-to-screen-space-coordinate-and-getting-incorre
+  // Vector4 objectPos4 = new Vector4( object.WorldPosition, 1.0f );
+  // Vector4 postProjectivePosition = Vector4.Transform(objectPos4, camera.ViewProjectionMatrix);
+  // Float clipSpaceX = postProjectivePosition.X / postProjectivePosition.W;
+  // Float clipSpaceY = postProjectivePosition.Y / postProjectivePosition.W;
+  
+  ERR("doesnt work i think");
+  vec4 pos4 = { pos[0], pos[1], pos[2], 1.0f };
+  mat4 view_proj;
+  mat4_mul(view, proj, view_proj);
+  mat4_mul_v(view_proj, pos4, pos4);
+  out[0] = pos4[0] / pos4[3];
+  out[1] = pos4[1] / pos4[3];
 }
 
 // M_INLINE void space_screen_to_model(mat4 model, mat4 view, mat4 proj, vec2 pos_normalized, float depth, vec3 out) 

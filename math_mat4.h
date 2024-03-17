@@ -71,11 +71,19 @@ M_INLINE void mat4_set_pos(float x, float y, float z, mat4 out)
 }
 // #define mat4_set_pos_vec3(pos, out) mat4_set_pos((pos)[0], (pos)[1], (pos)[2], out)
 M_INLINE void mat4_set_pos_vec3(vec3 pos, mat4 out) 
+{ mat4_set_pos(pos[0], pos[1], pos[2], out); }
+
+// @DOC: add to postion value in a model matrix
+//       out: this matrix will have its pos set 
+M_INLINE void mat4_pos_add(float x, float y, float z, mat4 out)
 {
-  out[3][0] = pos[0];
-  out[3][1] = pos[1];
-  out[3][2] = pos[2];
+  out[3][0] += x;
+  out[3][1] += y;
+  out[3][2] += z;
 }
+M_INLINE void mat4_pos_add_vec3(vec3 pos, mat4 out) 
+{ mat4_pos_add(pos[0], pos[1], pos[2], out); }
+
 // @DOC: get postion value out of a model matrix
 //       m:   model matrix to extract pos from
 //       out: will be set to position value
@@ -118,6 +126,11 @@ M_INLINE void mat4_get_scale(mat4 mat, float* x, float* y, float* z)
 // @DOC: copy one matrix into another
 //       m:   matrix to source from
 //       out: matrix to copy into
+#define MAT4_INIT_COPY(m)                             \
+  { { (m)[0][0], (m)[0][1], (m)[0][2], (m)[0][3] },   \
+    { (m)[1][0], (m)[1][1], (m)[1][2], (m)[1][3] },   \
+    { (m)[2][0], (m)[2][1], (m)[2][2], (m)[2][3] },   \
+    { (m)[3][0], (m)[3][1], (m)[3][2], (m)[3][3] } }
 M_INLINE void mat4_copy(mat4 m, mat4 out)
 {
   vec4_copy(m[0], out[0]);
