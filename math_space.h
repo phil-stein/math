@@ -19,7 +19,8 @@ extern "C"
 //                       y: mouse-pos.y range -1 to 1
 //       depth:          dist range -1 to 1, between near & far plane
 //       out:            gets set to world pos 
-M_INLINE void space_screen_to_world(mat4 view, mat4 proj, vec2 pos_normalized, float depth, vec3 out) 
+#define space_screen_to_world(view, proj, pos_normalized, depth, out) space_screen_to_world_dbg(view, proj, pos_normalized, depth, out, __FILE__, __func__, __LINE__) 
+M_INLINE void space_screen_to_world_dbg(mat4 view, mat4 proj, vec2 pos_normalized, float depth, vec3 out, const char* _file, const char* _func, int _line) 
 {  
   // taken from: https://stackoverflow.com/questions/7692988/opengl-math-projecting-screen-space-to-world-space-coords
   // 1. get mouse-pos, view & proj mat
@@ -34,6 +35,8 @@ M_INLINE void space_screen_to_world(mat4 view, mat4 proj, vec2 pos_normalized, f
   // 6. multiply vec & inv_view_proj
   // 7. divide pos.xyz by pos.w
   //    pos.w /= 1; pos.xyz *= pos.w;
+  
+  printf( "space_screen_to_world: %s %s %d\n", _file, _func, _line );
 
   mat4 inv_v_p;
   mat4_mul(proj, view, inv_v_p);        // @UNSURE: about order
